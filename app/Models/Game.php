@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Game extends Model
 {
@@ -75,5 +76,11 @@ class Game extends Model
             ->belongsToMany(Publisher::class, 'library_game_publisher', 'library_game_id', 'library_publisher_id')
             ->using(GamePublisher::class)
             ->withTimestamps();
+    }
+
+    /** @return HasMany<Review> */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class, 'library_game_id');
     }
 }

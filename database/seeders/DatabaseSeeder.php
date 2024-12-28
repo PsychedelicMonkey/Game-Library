@@ -10,6 +10,7 @@ use App\Models\Genre;
 use App\Models\Platform;
 use App\Models\Post;
 use App\Models\Publisher;
+use App\Models\Review;
 use App\Models\User;
 use Closure;
 use Illuminate\Database\Eloquent\Collection;
@@ -35,6 +36,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
         ]));
         $this->command->info('Admin user created.');
+
+        $this->command->warn(PHP_EOL.'Creating guest users...');
+        $guests = $this->withProgressBar(1000, fn () => User::factory(1)
+            ->create());
+        $this->command->info('Guest users created.');
 
         // Library
         $this->command->warn(PHP_EOL.'Creating library developers...');
@@ -65,6 +71,15 @@ class DatabaseSeeder extends Seeder
             ->hasAttached($platforms->random(rand(1, 3)))
             ->create());
         $this->command->info('Library games created.');
+
+        $this->command->warn(PHP_EOL.'Creating library reviews...');
+        $this->withProgressBar(100, fn () => Review::factory(1)
+            ->sequence(fn ($sequence) => [
+                'library_game_id' => $games->random(1)->first()->id,
+                'user_id' => $guests->random(1)->first()->id,
+            ])
+            ->create());
+        $this->command->info('Library reviews created.');
 
         // Blog
         $this->command->warn(PHP_EOL.'Creating blog categories...');
