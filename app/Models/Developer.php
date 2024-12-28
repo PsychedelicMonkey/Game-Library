@@ -43,7 +43,7 @@ class Developer extends Model
     {
         return $this
             ->belongsToMany(Game::class, 'library_developer_game', 'library_developer_id', 'library_game_id')
-            ->withPivot(['is_primary', 'sort'])
+            ->using(DeveloperGame::class)
             ->withTimestamps();
     }
 }

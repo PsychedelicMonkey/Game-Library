@@ -44,24 +44,36 @@ class Game extends Model
     /** @return BelongsToMany<Developer> */
     public function developers(): BelongsToMany
     {
-        return $this->belongsToMany(Developer::class, 'library_developer_game', 'library_game_id', 'library_developer_id');
+        return $this
+            ->belongsToMany(Developer::class, 'library_developer_game', 'library_game_id', 'library_developer_id')
+            ->using(DeveloperGame::class)
+            ->withTimestamps();
     }
 
     /** @return BelongsToMany<Genre> */
     public function genres(): BelongsToMany
     {
-        return $this->belongsToMany(Genre::class, 'library_game_genre', 'library_game_id', 'library_genre_id');
+        return $this
+            ->belongsToMany(Genre::class, 'library_game_genre', 'library_game_id', 'library_genre_id')
+            ->using(GameGenre::class)
+            ->withTimestamps();
     }
 
     /** @return BelongsToMany<Platform> */
     public function platforms(): BelongsToMany
     {
-        return $this->belongsToMany(Platform::class, 'library_game_platform', 'library_game_id', 'library_platform_id');
+        return $this
+            ->belongsToMany(Platform::class, 'library_game_platform', 'library_game_id', 'library_platform_id')
+            ->using(GamePlatform::class)
+            ->withTimestamps();
     }
 
     /** @return BelongsToMany<Publisher> */
     public function publishers(): BelongsToMany
     {
-        return $this->belongsToMany(Publisher::class, 'library_game_publisher', 'library_game_id', 'library_publisher_id');
+        return $this
+            ->belongsToMany(Publisher::class, 'library_game_publisher', 'library_game_id', 'library_publisher_id')
+            ->using(GamePublisher::class)
+            ->withTimestamps();
     }
 }

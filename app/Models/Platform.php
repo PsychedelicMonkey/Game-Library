@@ -43,7 +43,7 @@ class Platform extends Model
     {
         return $this
             ->belongsToMany(Game::class, 'library_game_platform', 'library_platform_id', 'library_game_id')
-            ->withPivot(['url', 'release_date', 'sort'])
+            ->using(GamePlatform::class)
             ->withTimestamps();
     }
 }
