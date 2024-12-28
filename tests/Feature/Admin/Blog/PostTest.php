@@ -9,18 +9,12 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
 
-use function Pest\Laravel\actingAs;
-use function Pest\Laravel\assertDatabaseHas;
-use function Pest\Laravel\assertModelMissing;
-use function Pest\Laravel\assertNotSoftDeleted;
-use function Pest\Laravel\assertSoftDeleted;
-use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
 
-beforeEach(fn () => actingAs(User::factory()->create()));
+beforeEach(fn () => $this->actingAs(User::factory()->create()));
 
 test('post page can be rendered', function () {
-    get(PostResource::getUrl())
+    $this->get(PostResource::getUrl())
         ->assertSuccessful();
 });
 
@@ -36,7 +30,7 @@ test('can lists posts', function () {
 
 describe('create posts', function () {
     test('can render page', function () {
-        get(PostResource::getUrl('create'))
+        $this->get(PostResource::getUrl('create'))
             ->assertSuccessful();
     });
 
@@ -59,7 +53,7 @@ describe('create posts', function () {
             ->call('create')
             ->assertHasNoFormErrors();
 
-        assertDatabaseHas(Post::class, [
+        $this->assertDatabaseHas(Post::class, [
             'blog_author_id' => $newData->author->getKey(),
             'blog_category_id' => $newData->category->getKey(),
             'title' => $newData->title,
@@ -82,7 +76,7 @@ describe('create posts', function () {
 
 describe('edit posts', function () {
     test('can render page', function () {
-        get(PostResource::getUrl('edit', [
+        $this->get(PostResource::getUrl('edit', [
             'record' => Post::factory()->create([
                 'blog_author_id' => Author::factory(),
                 'blog_category_id' => Category::factory(),
@@ -137,7 +131,7 @@ describe('edit posts', function () {
             ->call('save')
             ->assertHasNoFormErrors();
 
-        expect($post->refresh())
+        $this->expect($post->refresh())
             ->blog_author_id->toBe($newData->author->getKey())
             ->blog_category_id->toBe($newData->category->getKey())
             ->title->toBe($newData->title)
@@ -177,7 +171,7 @@ describe('deleting', function () {
         ])
             ->callAction(DeleteAction::class);
 
-        assertSoftDeleted($post);
+        $this->assertSoftDeleted($post);
     });
 
     test('can restore', function () {
@@ -193,7 +187,7 @@ describe('deleting', function () {
         ])
             ->callAction(RestoreAction::class);
 
-        assertNotSoftDeleted($post);
+        $this->assertNotSoftDeleted($post);
     });
 
     test('can force delete', function () {
@@ -209,6 +203,6 @@ describe('deleting', function () {
         ])
             ->callAction(ForceDeleteAction::class);
 
-        assertModelMissing($post);
+        $this->assertModelMissing($post);
     });
 });
