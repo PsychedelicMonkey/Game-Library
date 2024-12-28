@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Filament\Pages\Dashboard;
+
 use function Pest\Laravel\actingAs;
 
 test('dashboard can be rendered', function () {
