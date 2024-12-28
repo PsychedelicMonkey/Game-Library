@@ -30,40 +30,40 @@ class DatabaseSeeder extends Seeder
         DB::raw('SET time_zone=\'+00:00\'');
 
         // Admin
-        $this->command->warn(PHP_EOL.'Creating admin user...');
+        $this->command->warn(PHP_EOL . 'Creating admin user...');
         $user = $this->withProgressBar(1, fn () => User::factory(1)->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
         ]));
         $this->command->info('Admin user created.');
 
-        $this->command->warn(PHP_EOL.'Creating guest users...');
+        $this->command->warn(PHP_EOL . 'Creating guest users...');
         $guests = $this->withProgressBar(1000, fn () => User::factory(1)
             ->create());
         $this->command->info('Guest users created.');
 
         // Library
-        $this->command->warn(PHP_EOL.'Creating library developers...');
+        $this->command->warn(PHP_EOL . 'Creating library developers...');
         $developers = $this->withProgressBar(20, fn () => Developer::factory(1)
             ->create());
         $this->command->info('Library developers created.');
 
-        $this->command->warn(PHP_EOL.'Creating library publishers...');
+        $this->command->warn(PHP_EOL . 'Creating library publishers...');
         $publishers = $this->withProgressBar(20, fn () => Publisher::factory(1)
             ->create());
         $this->command->info('Library publishers created.');
 
-        $this->command->warn(PHP_EOL.'Creating library genres...');
+        $this->command->warn(PHP_EOL . 'Creating library genres...');
         $genres = $this->withProgressBar(20, fn () => Genre::factory(1)
             ->create());
         $this->command->info('Library genres created.');
 
-        $this->command->warn(PHP_EOL.'Creating library platforms...');
+        $this->command->warn(PHP_EOL . 'Creating library platforms...');
         $platforms = $this->withProgressBar(20, fn () => Platform::factory(1)
             ->create());
         $this->command->info('Library platforms created.');
 
-        $this->command->warn(PHP_EOL.'Creating library games...');
+        $this->command->warn(PHP_EOL . 'Creating library games...');
         $games = $this->withProgressBar(1000, fn () => Game::factory(1)
             ->hasAttached($developers->random(rand(1, 3)))
             ->hasAttached($publishers->random(rand(1, 3)))
@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
             ->create());
         $this->command->info('Library games created.');
 
-        $this->command->warn(PHP_EOL.'Creating library reviews...');
+        $this->command->warn(PHP_EOL . 'Creating library reviews...');
         $this->withProgressBar(100, fn () => Review::factory(1)
             ->sequence(fn ($sequence) => [
                 'library_game_id' => $games->random(1)->first()->id,
@@ -82,12 +82,12 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Library reviews created.');
 
         // Blog
-        $this->command->warn(PHP_EOL.'Creating blog categories...');
+        $this->command->warn(PHP_EOL . 'Creating blog categories...');
         $categories = $this->withProgressBar(20, fn () => Category::factory(1)
             ->create());
         $this->command->info('Blog categories created.');
 
-        $this->command->warn(PHP_EOL.'Creating blog authors and posts...');
+        $this->command->warn(PHP_EOL . 'Creating blog authors and posts...');
         $this->withProgressBar(20, fn () => Author::factory(1)
             ->has(
                 Post::factory()->count(5)
