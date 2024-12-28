@@ -4,7 +4,12 @@ namespace Database\Seeders;
 
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\Developer;
+use App\Models\Game;
+use App\Models\Genre;
+use App\Models\Platform;
 use App\Models\Post;
+use App\Models\Publisher;
 use App\Models\User;
 use Closure;
 use Illuminate\Database\Eloquent\Collection;
@@ -30,6 +35,36 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
         ]));
         $this->command->info('Admin user created.');
+
+        // Library
+        $this->command->warn(PHP_EOL.'Creating library developers...');
+        $developers = $this->withProgressBar(20, fn () => Developer::factory(1)
+            ->create());
+        $this->command->info('Library developers created.');
+
+        $this->command->warn(PHP_EOL.'Creating library publishers...');
+        $publishers = $this->withProgressBar(20, fn () => Publisher::factory(1)
+            ->create());
+        $this->command->info('Library publishers created.');
+
+        $this->command->warn(PHP_EOL.'Creating library genres...');
+        $genres = $this->withProgressBar(20, fn () => Genre::factory(1)
+            ->create());
+        $this->command->info('Library genres created.');
+
+        $this->command->warn(PHP_EOL.'Creating library platforms...');
+        $platforms = $this->withProgressBar(20, fn () => Platform::factory(1)
+            ->create());
+        $this->command->info('Library platforms created.');
+
+        $this->command->warn(PHP_EOL.'Creating library games...');
+        $games = $this->withProgressBar(1000, fn () => Game::factory(1)
+            ->hasAttached($developers->random(rand(1, 3)))
+            ->hasAttached($publishers->random(rand(1, 3)))
+            ->hasAttached($genres->random(rand(1, 3)))
+            ->hasAttached($platforms->random(rand(1, 3)))
+            ->create());
+        $this->command->info('Library games created.');
 
         // Blog
         $this->command->warn(PHP_EOL.'Creating blog categories...');
