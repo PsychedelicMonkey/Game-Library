@@ -8,6 +8,7 @@ use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
+use Illuminate\Support\Str;
 
 use function Pest\Livewire\livewire;
 
@@ -32,6 +33,23 @@ describe('create posts', function () {
     test('can render page', function () {
         $this->get(PostResource::getUrl('create'))
             ->assertSuccessful();
+    });
+
+    test('can automatically generate a slug from the title', function () {
+        $title = fake()->sentence();
+
+        livewire(PostResource\Pages\CreatePost::class)
+            ->fillForm([
+                'title' => $title,
+            ])
+            ->assertFormSet(function (array $state) use ($title): array {
+                expect($state['slug'])
+                    ->not->toContain(' ');
+
+                return [
+                    'slug' => Str::slug($title),
+                ];
+            });
     });
 
     test('can create', function () {
