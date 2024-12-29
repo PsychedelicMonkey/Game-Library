@@ -8,18 +8,16 @@ use function Pest\Livewire\livewire;
 
 beforeEach(fn () => $this->actingAs(User::factory()->create()));
 
-describe('list users', function () {
-    test('can render page', function () {
-        $this->get(UserResource::getUrl('index'))
-            ->assertSuccessful();
-    });
+test('can render page', function () {
+    $this->get(UserResource::getUrl('index'))
+        ->assertSuccessful();
+});
 
-    test('can list users', function () {
-        $users = User::factory()->count(10)->create();
+test('can list users', function () {
+    $users = User::factory()->count(10)->create();
 
-        livewire(UserResource\Pages\ListUsers::class)
-            ->assertCanSeeTableRecords($users);
-    });
+    livewire(UserResource\Pages\ListUsers::class)
+        ->assertCanSeeTableRecords($users);
 });
 
 describe('create users', function () {
