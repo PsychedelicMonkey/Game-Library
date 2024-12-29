@@ -57,6 +57,12 @@ class Game extends Model implements HasMedia
             ->withTimestamps();
     }
 
+    /** @return HasMany<GamePlatform> */
+    public function gamePlatforms(): HasMany
+    {
+        return $this->hasMany(GamePlatform::class, 'library_game_id');
+    }
+
     /** @return BelongsToMany<Genre> */
     public function genres(): BelongsToMany
     {
