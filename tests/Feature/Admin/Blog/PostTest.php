@@ -14,19 +14,21 @@ use function Pest\Livewire\livewire;
 
 beforeEach(fn () => $this->actingAs(User::factory()->create()));
 
-test('post page can be rendered', function () {
-    $this->get(PostResource::getUrl())
-        ->assertSuccessful();
-});
+describe('list posts', function () {
+    test('post page can be rendered', function () {
+        $this->get(PostResource::getUrl())
+            ->assertSuccessful();
+    });
 
-test('can lists posts', function () {
-    $posts = Post::factory(10)->create([
-        'blog_author_id' => Author::factory(),
-        'blog_category_id' => Category::factory(),
-    ]);
+    test('can lists posts', function () {
+        $posts = Post::factory(10)->create([
+            'blog_author_id' => Author::factory(),
+            'blog_category_id' => Category::factory(),
+        ]);
 
-    livewire(PostResource\Pages\ListPosts::class)
-        ->assertCanSeeTableRecords($posts);
+        livewire(PostResource\Pages\ListPosts::class)
+            ->assertCanSeeTableRecords($posts);
+    });
 });
 
 describe('create posts', function () {
