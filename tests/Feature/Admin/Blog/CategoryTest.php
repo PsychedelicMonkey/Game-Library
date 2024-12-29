@@ -1,6 +1,6 @@
 <?php
 
-use App\Filament\Resources\CategoryResource;
+use App\Filament\Resources\Blog\CategoryResource;
 use App\Models\User;
 
 use function Pest\Laravel\actingAs;

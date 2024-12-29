@@ -5,7 +5,7 @@ namespace App\Filament\Clusters\Library\Resources;
 use App\Filament\Clusters\Library;
 use App\Filament\Clusters\Library\Resources\DeveloperResource\Pages;
 use App\Filament\Clusters\Library\Resources\DeveloperResource\RelationManagers;
-use App\Models\Developer;
+use App\Models\Library\Developer;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;

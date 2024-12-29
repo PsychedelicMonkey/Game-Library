@@ -2,15 +2,15 @@
 
 namespace Database\Seeders;
 
-use App\Models\Author;
-use App\Models\Category;
-use App\Models\Developer;
-use App\Models\Game;
-use App\Models\Genre;
-use App\Models\Platform;
-use App\Models\Post;
-use App\Models\Publisher;
-use App\Models\Review;
+use App\Models\Blog\Author;
+use App\Models\Blog\Category;
+use App\Models\Blog\Post;
+use App\Models\Library\Developer;
+use App\Models\Library\Game;
+use App\Models\Library\Genre;
+use App\Models\Library\Platform;
+use App\Models\Library\Publisher;
+use App\Models\Library\Review;
 use App\Models\User;
 use Closure;
 use Illuminate\Database\Eloquent\Collection;

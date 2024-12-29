@@ -1,6 +1,6 @@
 <?php
 
-use App\Filament\Resources\UserResource;
+use App\Filament\Resources\General\UserResource;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
 
@@ -17,7 +17,7 @@ describe('list users', function () {
     test('can list users', function () {
         $users = User::factory()->count(10)->create();
 
-        livewire(UserResource\Pages\ListUsers::class)
+        livewire(\App\Filament\Resources\General\UserResource\Pages\ListUsers::class)
             ->assertCanSeeTableRecords($users);
     });
 });
@@ -31,7 +31,7 @@ describe('create users', function () {
     test('can create', function () {
         $newData = User::factory()->make();
 
-        livewire(UserResource\Pages\CreateUser::class)
+        livewire(\App\Filament\Resources\General\UserResource\Pages\CreateUser::class)
             ->fillForm([
                 'name' => $newData->name,
                 'email' => $newData->email,
@@ -49,7 +49,7 @@ describe('create users', function () {
     });
 
     test('can validate input', function () {
-        livewire(UserResource\Pages\CreateUser::class)
+        livewire(\App\Filament\Resources\General\UserResource\Pages\CreateUser::class)
             ->fillForm([
                 'name' => null,
             ])
@@ -68,7 +68,7 @@ describe('edit users', function () {
     test('can retrieve data', function () {
         $user = User::factory()->create();
 
-        livewire(UserResource\Pages\EditUser::class, [
+        livewire(\App\Filament\Resources\General\UserResource\Pages\EditUser::class, [
             'record' => $user->getRouteKey(),
         ])
             ->assertFormSet([
@@ -81,7 +81,7 @@ describe('edit users', function () {
         $user = User::factory()->create();
         $newData = User::factory()->make();
 
-        livewire(UserResource\Pages\EditUser::class, [
+        livewire(\App\Filament\Resources\General\UserResource\Pages\EditUser::class, [
             'record' => $user->getRouteKey(),
         ])
             ->fillForm([
@@ -101,7 +101,7 @@ describe('edit users', function () {
     test('can validate input', function () {
         $user = User::factory()->create();
 
-        livewire(UserResource\Pages\EditUser::class, [
+        livewire(\App\Filament\Resources\General\UserResource\Pages\EditUser::class, [
             'record' => $user->getRouteKey(),
         ])
             ->fillForm([
@@ -114,7 +114,7 @@ describe('edit users', function () {
     test('can delete', function () {
         $user = User::factory()->create();
 
-        livewire(UserResource\Pages\EditUser::class, [
+        livewire(\App\Filament\Resources\General\UserResource\Pages\EditUser::class, [
             'record' => $user->getRouteKey(),
         ])
             ->callAction(DeleteAction::class);

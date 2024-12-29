@@ -3,7 +3,7 @@
 namespace App\Filament\Clusters\Library\Resources\GameResource\Pages;
 
 use App\Filament\Clusters\Library\Resources\GameResource;
-use App\Filament\Resources\ReviewResource;
+use App\Filament\Resources\Library\ReviewResource;
 use Filament\Forms\Form;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Pages\ManageRelatedRecords;
