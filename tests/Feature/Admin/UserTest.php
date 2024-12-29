@@ -20,7 +20,6 @@ describe('list users', function () {
         livewire(UserResource\Pages\ListUsers::class)
             ->assertCanSeeTableRecords($users);
     });
-
 });
 
 describe('create users', function () {
