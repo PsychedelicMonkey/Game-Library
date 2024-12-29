@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Clusters\Library\Resources\GameResource\Pages\ManageGameReviews;
 use App\Filament\Resources\ReviewResource\Pages;
 use App\Models\Review;
 use Filament\Forms;
@@ -35,6 +36,7 @@ class ReviewResource extends Resource
                         Forms\Components\Grid::make()
                             ->schema([
                                 Forms\Components\Select::make('library_game_id')
+                                    ->hiddenOn(ManageGameReviews::class)
                                     ->relationship('game', 'name')
                                     ->required()
                                     ->searchable(),
@@ -50,8 +52,8 @@ class ReviewResource extends Resource
                             ->required(),
 
                         Forms\Components\DateTimePicker::make('published_at')
-                            ->native(false)
-                            ->placeholder(now()->format('M d, Y H:m:s')),
+                            ->default(now())
+                            ->native(false),
 
                         Forms\Components\Grid::make()
                             ->schema([
@@ -101,6 +103,7 @@ class ReviewResource extends Resource
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('game.name')
+                    ->hiddenOn(ManageGameReviews::class)
                     ->searchable()
                     ->sortable(),
 

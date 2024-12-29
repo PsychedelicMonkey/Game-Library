@@ -9,11 +9,14 @@ use App\Models\Game;
 use App\Models\Platform;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Pages\SubNavigationPosition;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 class GameResource extends Resource
@@ -143,7 +146,25 @@ class GameResource extends Resource
             'index' => Pages\ListGames::route('/'),
             'create' => Pages\CreateGame::route('/create'),
             'edit' => Pages\EditGame::route('/{record}/edit'),
+            'reviews' => Pages\ManageGameReviews::route('/{record}/reviews'),
         ];
+    }
+
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            Pages\EditGame::class,
+            Pages\ManageGameReviews::class,
+        ]);
+    }
+
+    public static function getSubNavigationPosition(): SubNavigationPosition
+    {
+        if (Route::currentRouteName() === Pages\ListGames::getRouteName()) {
+            return SubNavigationPosition::Start;
+        }
+
+        return SubNavigationPosition::Top;
     }
 
     public static function getGloballySearchableAttributes(): array
