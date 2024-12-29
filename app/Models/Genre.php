@@ -44,6 +44,7 @@ class Genre extends Model
         return $this
             ->belongsToMany(Game::class, 'library_game_genre', 'library_genre_id', 'library_game_id')
             ->using(GameGenre::class)
+            ->withPivot(['is_primary', 'sort'])
             ->withTimestamps();
     }
 }

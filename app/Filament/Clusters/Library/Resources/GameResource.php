@@ -4,23 +4,22 @@ namespace App\Filament\Clusters\Library\Resources;
 
 use App\Filament\Clusters\Library;
 use App\Filament\Clusters\Library\Resources\GameResource\Pages;
-use App\Filament\Clusters\Library\Resources\GameResource\RelationManagers;
 use App\Models\Game;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class GameResource extends Resource
 {
     protected static ?string $model = Game::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
     protected static ?string $cluster = Library::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-puzzle-piece';
+
+    protected static ?int $navigationSort = 0;
 
     public static function form(Form $form): Form
     {

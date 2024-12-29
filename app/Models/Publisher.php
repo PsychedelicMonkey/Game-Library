@@ -44,6 +44,7 @@ class Publisher extends Model
         return $this
             ->belongsToMany(Game::class, 'library_game_publisher', 'library_publisher_id', 'library_game_id')
             ->using(GamePublisher::class)
+            ->withPivot(['is_primary', 'sort'])
             ->withTimestamps();
     }
 }

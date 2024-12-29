@@ -18,7 +18,7 @@ class GamePublisher extends Pivot
     protected $fillable = [
         'library_game_id',
         'library_publisher_id',
-        'is_available',
+        'is_primary',
         'sort',
     ];
 
@@ -28,7 +28,7 @@ class GamePublisher extends Pivot
     protected function casts(): array
     {
         return [
-            'is_available' => 'boolean',
+            'is_primary' => 'boolean',
             'sort' => 'integer',
         ];
     }
