@@ -119,7 +119,7 @@ class GameResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // TODO: release_date filter
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
