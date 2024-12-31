@@ -263,25 +263,42 @@ class GameResource extends Resource
             ->schema([
                 // TODO: add create option to select.
                 Forms\Components\Select::make('library_platform_id')
+                    ->disableOptionsWhenSelectedInSiblingRepeaterItems()
+                    ->distinct()
                     ->label('Platform')
                     ->options(Platform::query()->pluck('name', 'id'))
                     ->required()
-                    ->searchable(),
+                    ->searchable()
+                    ->columnSpan([
+                        'md' => 4,
+                    ]),
 
                 Forms\Components\TextInput::make('url')
                     ->label('URL')
                     ->maxLength(255)
-                    ->url(),
+                    ->placeholder('https://example.com')
+                    ->url()
+                    ->columnSpan([
+                        'md' => 4,
+                    ]),
 
                 Forms\Components\DatePicker::make('release_date')
                     ->native(false)
-                    ->placeholder(now()->format('M d, Y')),
+                    ->placeholder(now()->format('M d, Y'))
+                    ->columnSpan([
+                        'md' => 2,
+                    ]),
             ])
+            ->addActionLabel('Add platform')
+            ->collapsible()
             ->defaultItems(1)
             ->hiddenLabel()
             ->orderColumn('sort')
             ->reorderable()
-            ->required();
+            ->required()
+            ->columns([
+                'md' => 10,
+            ]);
     }
 
     public static function getScreenshotSchema(): Forms\Components\SpatieMediaLibraryFileUpload
