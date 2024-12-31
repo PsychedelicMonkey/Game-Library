@@ -22,7 +22,7 @@ describe('list reviews', function () {
             'user_id' => User::factory(),
         ]);
 
-        livewire(\App\Filament\Resources\Library\ReviewResource\Pages\ListReviews::class)
+        livewire(ReviewResource\Pages\ListReviews::class)
             ->assertCanSeeTableRecords($reviews);
     });
 });
@@ -39,7 +39,7 @@ describe('create reviews', function () {
             'user_id' => User::factory(),
         ]);
 
-        livewire(\App\Filament\Resources\Library\ReviewResource\Pages\CreateReview::class)
+        livewire(ReviewResource\Pages\CreateReview::class)
             ->fillForm([
                 'library_game_id' => $newData->game->getKey(),
                 'user_id' => $newData->user->getKey(),
@@ -64,7 +64,7 @@ describe('create reviews', function () {
     });
 
     test('can validate input', function () {
-        livewire(\App\Filament\Resources\Library\ReviewResource\Pages\CreateReview::class)
+        livewire(ReviewResource\Pages\CreateReview::class)
             ->fillForm([
                 'title' => null,
             ])
@@ -89,7 +89,7 @@ describe('edit reviews', function () {
             'user_id' => User::factory(),
         ]);
 
-        livewire(\App\Filament\Resources\Library\ReviewResource\Pages\EditReview::class, [
+        livewire(ReviewResource\Pages\EditReview::class, [
             'record' => $review->getRouteKey(),
         ])
             ->assertFormSet([
@@ -114,7 +114,7 @@ describe('edit reviews', function () {
             'user_id' => User::factory(),
         ]);
 
-        livewire(\App\Filament\Resources\Library\ReviewResource\Pages\EditReview::class, [
+        livewire(ReviewResource\Pages\EditReview::class, [
             'record' => $review->getRouteKey(),
         ])
             ->fillForm([
@@ -143,7 +143,7 @@ describe('edit reviews', function () {
             'library_game_id' => Game::factory(),
             'user_id' => User::factory(),
         ]);
-        livewire(\App\Filament\Resources\Library\ReviewResource\Pages\EditReview::class, [
+        livewire(ReviewResource\Pages\EditReview::class, [
             'record' => $review->getRouteKey(),
         ])
             ->fillForm([
@@ -159,7 +159,7 @@ describe('edit reviews', function () {
             'user_id' => User::factory(),
         ]);
 
-        livewire(\App\Filament\Resources\Library\ReviewResource\Pages\EditReview::class, [
+        livewire(ReviewResource\Pages\EditReview::class, [
             'record' => $review->getRouteKey(),
         ])
             ->callAction(DeleteAction::class);

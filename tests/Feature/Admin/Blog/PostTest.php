@@ -26,7 +26,7 @@ describe('list posts', function () {
             'blog_category_id' => Category::factory(),
         ]);
 
-        livewire(\App\Filament\Resources\Blog\PostResource\Pages\ListPosts::class)
+        livewire(PostResource\Pages\ListPosts::class)
             ->assertCanSeeTableRecords($posts);
     });
 });
@@ -40,7 +40,7 @@ describe('create posts', function () {
     test('can automatically generate a slug from the title', function () {
         $title = fake()->sentence();
 
-        livewire(\App\Filament\Resources\Blog\PostResource\Pages\CreatePost::class)
+        livewire(PostResource\Pages\CreatePost::class)
             ->fillForm([
                 'title' => $title,
             ])
@@ -60,7 +60,7 @@ describe('create posts', function () {
             'blog_category_id' => Category::factory(),
         ]);
 
-        livewire(\App\Filament\Resources\Blog\PostResource\Pages\CreatePost::class)
+        livewire(PostResource\Pages\CreatePost::class)
             ->fillForm([
                 'blog_author_id' => $newData->author->getKey(),
                 'blog_category_id' => $newData->category->getKey(),
@@ -85,7 +85,7 @@ describe('create posts', function () {
     });
 
     test('can validate input', function () {
-        livewire(\App\Filament\Resources\Blog\PostResource\Pages\CreatePost::class)
+        livewire(PostResource\Pages\CreatePost::class)
             ->fillForm([
                 'title' => null,
             ])
@@ -111,7 +111,7 @@ describe('edit posts', function () {
             'blog_category_id' => Category::factory(),
         ]);
 
-        livewire(\App\Filament\Resources\Blog\PostResource\Pages\EditPost::class, [
+        livewire(PostResource\Pages\EditPost::class, [
             'record' => $post->getRouteKey(),
         ])
             ->assertFormSet([
@@ -136,7 +136,7 @@ describe('edit posts', function () {
             'blog_category_id' => Category::factory(),
         ]);
 
-        livewire(\App\Filament\Resources\Blog\PostResource\Pages\EditPost::class, [
+        livewire(PostResource\Pages\EditPost::class, [
             'record' => $post->getRouteKey(),
         ])
             ->fillForm([
@@ -168,7 +168,7 @@ describe('edit posts', function () {
             'blog_category_id' => Category::factory(),
         ]);
 
-        livewire(\App\Filament\Resources\Blog\PostResource\Pages\EditPost::class, [
+        livewire(PostResource\Pages\EditPost::class, [
             'record' => $post->getRouteKey(),
         ])
             ->fillForm([
@@ -186,7 +186,7 @@ describe('deleting', function () {
             'blog_category_id' => Category::factory(),
         ]);
 
-        livewire(\App\Filament\Resources\Blog\PostResource\Pages\EditPost::class, [
+        livewire(PostResource\Pages\EditPost::class, [
             'record' => $post->getRouteKey(),
         ])
             ->callAction(DeleteAction::class);
@@ -202,7 +202,7 @@ describe('deleting', function () {
 
         $post->delete();
 
-        livewire(\App\Filament\Resources\Blog\PostResource\Pages\EditPost::class, [
+        livewire(PostResource\Pages\EditPost::class, [
             'record' => $post->getRouteKey(),
         ])
             ->callAction(RestoreAction::class);
@@ -218,7 +218,7 @@ describe('deleting', function () {
 
         $post->delete();
 
-        livewire(\App\Filament\Resources\Blog\PostResource\Pages\EditPost::class, [
+        livewire(PostResource\Pages\EditPost::class, [
             'record' => $post->getRouteKey(),
         ])
             ->callAction(ForceDeleteAction::class);
