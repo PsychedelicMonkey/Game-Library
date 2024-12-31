@@ -1,6 +1,7 @@
 <?php
 
 use App\Filament\Clusters\Library\Resources\PlatformResource;
+use App\Models\Library\Game;
 use App\Models\Library\Platform;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
@@ -152,4 +153,28 @@ describe('edit platforms', function () {
     });
 });
 
-// TODO: test relation managers.
+describe('relation manager', function () {
+    test('can render relation manager', function () {
+        $platform = Platform::factory()
+            ->hasAttached(Game::factory()->count(10))
+            ->create();
+
+        livewire(PlatformResource\RelationManagers\GamesRelationManager::class, [
+            'ownerRecord' => $platform,
+            'pageClass' => PlatformResource\Pages\EditPlatform::class,
+        ])
+            ->assertSuccessful();
+    });
+
+    test('can list games', function () {
+        $platform = Platform::factory()
+            ->hasAttached(Game::factory()->count(10))
+            ->create();
+
+        livewire(PlatformResource\RelationManagers\GamesRelationManager::class, [
+            'ownerRecord' => $platform,
+            'pageClass' => PlatformResource\Pages\EditPlatform::class,
+        ])
+            ->assertCanSeeTableRecords($platform->games);
+    });
+});

@@ -2,6 +2,7 @@
 
 use App\Filament\Clusters\Library\Resources\DeveloperResource;
 use App\Models\Library\Developer;
+use App\Models\Library\Game;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Illuminate\Support\Str;
@@ -147,4 +148,28 @@ describe('edit developers', function () {
     });
 });
 
-// TODO: test relation managers.
+describe('relation manager', function () {
+    test('can render relation manager', function () {
+        $developer = Developer::factory()
+            ->hasAttached(Game::factory()->count(10))
+            ->create();
+
+        livewire(DeveloperResource\RelationManagers\GamesRelationManager::class, [
+            'ownerRecord' => $developer,
+            'pageClass' => DeveloperResource\Pages\EditDeveloper::class,
+        ])
+            ->assertSuccessful();
+    });
+
+    test('can list games', function () {
+        $developer = Developer::factory()
+            ->hasAttached(Game::factory()->count(10))
+            ->create();
+
+        livewire(DeveloperResource\RelationManagers\GamesRelationManager::class, [
+            'ownerRecord' => $developer,
+            'pageClass' => DeveloperResource\Pages\EditDeveloper::class,
+        ])
+            ->assertCanSeeTableRecords($developer->games);
+    });
+});

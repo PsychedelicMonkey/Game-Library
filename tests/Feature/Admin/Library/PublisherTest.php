@@ -1,6 +1,7 @@
 <?php
 
 use App\Filament\Clusters\Library\Resources\PublisherResource;
+use App\Models\Library\Game;
 use App\Models\Library\Publisher;
 use App\Models\User;
 use Filament\Actions\DeleteAction;
@@ -147,4 +148,28 @@ describe('edit publishers', function () {
     });
 });
 
-// TODO: test relation managers.
+describe('relation manager', function () {
+    test('can render relation manager', function () {
+        $publisher = Publisher::factory()
+            ->hasAttached(Game::factory()->count(10))
+            ->create();
+
+        livewire(PublisherResource\RelationManagers\GamesRelationManager::class, [
+            'ownerRecord' => $publisher,
+            'pageClass' => PublisherResource\Pages\EditPublisher::class,
+        ])
+            ->assertSuccessful();
+    });
+
+    test('can list games', function () {
+        $publisher = Publisher::factory()
+            ->hasAttached(Game::factory()->count(10))
+            ->create();
+
+        livewire(PublisherResource\RelationManagers\GamesRelationManager::class, [
+            'ownerRecord' => $publisher,
+            'pageClass' => PublisherResource\Pages\EditPublisher::class,
+        ])
+            ->assertCanSeeTableRecords($publisher->games);
+    });
+});
