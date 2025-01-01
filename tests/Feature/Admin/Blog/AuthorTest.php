@@ -9,6 +9,6 @@ use function Pest\Laravel\get;
 beforeEach(fn () => actingAs(User::factory()->create()));
 
 test('author page can be rendered', function () {
-    get(AuthorResource::getUrl())
-        ->assertSuccessful();
-});
+get(AuthorResource::getUrl())
+->assertSuccessful();
+    });
