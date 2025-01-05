@@ -7,6 +7,7 @@ use App\Filament\Clusters\Library\Resources\GameResource\Pages;
 use App\Filament\Clusters\Library\Resources\GameResource\RelationManagers;
 use App\Models\Library\Game;
 use App\Models\Library\Platform;
+use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Pages\SubNavigationPosition;
@@ -119,7 +120,38 @@ class GameResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                // TODO: release_date filter
+                Tables\Filters\Filter::make('release_date')
+                    ->form([
+                        Forms\Components\DatePicker::make('released_from')
+                            ->native(false)
+                            ->placeholder(fn ($state): string => 'Dec 18, ' . now()->subYear()->format('Y')),
+
+                        Forms\Components\DatePicker::make('released_until')
+                            ->native(false)
+                            ->placeholder(fn ($state): string => now()->format('M d, Y')),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['released_from'] ?? null,
+                                fn (Builder $query, $date): Builder => $query->whereDate('release_date', '>=', $date),
+                            )
+                            ->when(
+                                $data['released_until'] ?? null,
+                                fn (Builder $query, $date): Builder => $query->whereDate('release_date', '<=', $date),
+                            );
+                    })
+                    ->indicateUsing(function (array $data): array {
+                        $indicators = [];
+                        if ($data['released_from'] ?? null) {
+                            $indicators['released_from'] = 'Released from ' . Carbon::parse($data['released_from'])->toFormattedDateString();
+                        }
+                        if ($data['released_until'] ?? null) {
+                            $indicators['released_until'] = 'Released until ' . Carbon::parse($data['released_until'])->toFormattedDateString();
+                        }
+
+                        return $indicators;
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -160,11 +192,12 @@ class GameResource extends Resource
 
     public static function getSubNavigationPosition(): SubNavigationPosition
     {
-        if (Route::currentRouteName() === Pages\ListGames::getRouteName()) {
-            return SubNavigationPosition::Start;
+        if (Route::currentRouteName() === Pages\EditGame::getRouteName() ||
+            Route::currentRouteName() === Pages\ManageGameReviews::getRouteName()) {
+            return SubNavigationPosition::Top;
         }
 
-        return SubNavigationPosition::Top;
+        return SubNavigationPosition::Start;
     }
 
     public static function getGloballySearchableAttributes(): array
