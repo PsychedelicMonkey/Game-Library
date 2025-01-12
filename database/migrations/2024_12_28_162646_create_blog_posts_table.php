@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('blog_posts', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary()->unique();
+
             $table->foreignId('blog_author_id')->constrained()->cascadeOnDelete();
             $table->foreignId('blog_category_id')->nullable()->constrained()->nullOnDelete();
             $table->string('title');
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->text('content');
             $table->dateTime('published_at');
             $table->enum('status', ['draft', 'reviewing', 'published', 'rejected'])->default('draft');
+
             $table->timestamps();
             $table->softDeletes();
         });

@@ -2,11 +2,14 @@
 
 namespace App\Models\Library;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class GameGenre extends Pivot
 {
+    use HasUlids;
+
     /**
      * @var string
      */

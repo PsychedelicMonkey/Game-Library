@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('library_developers', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary()->unique();
+
             $table->string('name');
             $table->string('slug')->unique();
             $table->longText('description')->nullable();
             $table->boolean('is_visible')->default(false);
             $table->unsignedSmallInteger('position')->default(0);
+
             $table->timestamps();
         });
     }

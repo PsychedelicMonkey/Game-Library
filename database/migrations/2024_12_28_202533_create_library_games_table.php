@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('library_games', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary()->unique();
+
             $table->string('name');
             $table->string('slug')->unique();
             $table->longText('description')->nullable();
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->boolean('is_featured')->default(false);
             $table->date('release_date')->nullable();
             $table->unsignedSmallInteger('position')->default(0);
+
             $table->timestamps();
         });
     }

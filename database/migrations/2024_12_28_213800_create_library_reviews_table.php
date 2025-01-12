@@ -12,14 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('library_reviews', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('library_game_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->ulid('id')->primary()->unique();
+
+            $table->foreignUlid('library_game_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('user_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->text('content');
             $table->dateTime('published_at')->nullable();
             $table->boolean('is_visible')->default(false);
             $table->boolean('is_featured')->default(false);
+
             $table->timestamps();
         });
     }

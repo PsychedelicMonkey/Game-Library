@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('blog_authors', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary()->unique();
+
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->string('name');
             $table->string('email')->unique();
             $table->longText('bio')->nullable();
+
             $table->timestamps();
         });
     }

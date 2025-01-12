@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('library_game_genre', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('library_game_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('library_genre_id')->constrained()->cascadeOnDelete();
+            $table->ulid('id')->primary()->unique();
+
+            $table->foreignUlid('library_game_id')->constrained()->cascadeOnDelete();
+            $table->foreignUlid('library_genre_id')->constrained()->cascadeOnDelete();
             $table->boolean('is_primary')->default(false);
             $table->unsignedSmallInteger('sort')->default(0);
+
             $table->timestamps();
         });
     }

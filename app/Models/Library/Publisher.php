@@ -2,6 +2,7 @@
 
 namespace App\Models\Library;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -10,6 +11,7 @@ class Publisher extends Model
 {
     /** @use HasFactory<\Database\Factories\Library\PublisherFactory> */
     use HasFactory;
+    use HasUlids;
 
     /**
      * @var string
