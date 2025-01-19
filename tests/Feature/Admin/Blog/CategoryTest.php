@@ -9,6 +9,6 @@ use function Pest\Laravel\get;
 beforeEach(fn () => actingAs(User::factory()->create()));
 
 test('category page can be rendered', function () {
-    get(CategoryResource::getUrl())
-        ->assertSuccessful();
-});
+get(CategoryResource::getUrl())
+->assertSuccessful();
+    });
