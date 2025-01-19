@@ -58,11 +58,11 @@ class UserResource extends Resource
                     ->schema([
                         Forms\Components\Placeholder::make('created_at')
                             ->label('Created at')
-                            ->content(fn (User $record): ?string => $record->created_at?->diffForHumans()),
+                            ->content(fn (User $record): string => $record->created_at->diffForHumans()),
 
                         Forms\Components\Placeholder::make('updated_at')
                             ->label('Last modified at')
-                            ->content(fn (User $record): ?string => $record->updated_at?->diffForHumans()),
+                            ->content(fn (User $record): string => $record->updated_at->diffForHumans()),
                     ])
                     ->columnSpan(['lg' => 1])
                     ->hidden(fn (?User $record) => $record === null),
@@ -125,6 +125,7 @@ class UserResource extends Resource
         ];
     }
 
+    /** @return Builder<User> */
     public static function getEloquentQuery(): Builder
     {
         /** @var User $user */

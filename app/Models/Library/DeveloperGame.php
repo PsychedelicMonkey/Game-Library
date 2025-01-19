@@ -36,13 +36,13 @@ class DeveloperGame extends Pivot
         ];
     }
 
-    /** @return BelongsTo<Developer, self> */
+    /** @return BelongsTo<Developer, $this> */
     public function developer(): BelongsTo
     {
         return $this->belongsTo(Developer::class, 'library_developer_id');
     }
 
-    /** @return BelongsTo<Game, self> */
+    /** @return BelongsTo<Game, $this> */
     public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class, 'library_game_id');

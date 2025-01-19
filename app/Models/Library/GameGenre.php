@@ -36,13 +36,13 @@ class GameGenre extends Pivot
         ];
     }
 
-    /** @return BelongsTo<Game, self> */
+    /** @return BelongsTo<Game, $this> */
     public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class, 'library_game_id');
     }
 
-    /** @return BelongsTo<Genre, self> */
+    /** @return BelongsTo<Genre, $this> */
     public function genre(): BelongsTo
     {
         return $this->belongsTo(Genre::class, 'library_genre_id');

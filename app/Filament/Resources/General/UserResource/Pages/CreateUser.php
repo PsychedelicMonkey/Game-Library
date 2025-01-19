@@ -36,6 +36,7 @@ class CreateUser extends CreateRecord
         return $data;
     }
 
+    /** @return Step[] */
     public function getSteps(): array
     {
         return [

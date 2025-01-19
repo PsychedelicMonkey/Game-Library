@@ -28,6 +28,7 @@ class CreateGame extends CreateRecord
             ->columns(null);
     }
 
+    /** @return Wizard\Step[] */
     public function getSteps(): array
     {
         return [

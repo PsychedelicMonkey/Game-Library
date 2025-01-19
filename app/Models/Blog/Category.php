@@ -2,11 +2,22 @@
 
 namespace App\Models\Blog;
 
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Symfony\Component\Uid\Ulid;
 
+/**
+ * @property Ulid $id
+ * @property string $name
+ * @property string $slug
+ * @property ?string $description
+ * @property bool $is_visible
+ * @property CarbonInterface $created_at
+ * @property CarbonInterface $updated_at
+ */
 class Category extends Model
 {
     /** @use HasFactory<\Database\Factories\Blog\CategoryFactory> */
@@ -38,7 +49,7 @@ class Category extends Model
         ];
     }
 
-    /** @return HasMany<Post> */
+    /** @return HasMany<Post, $this> */
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class, 'blog_category_id');

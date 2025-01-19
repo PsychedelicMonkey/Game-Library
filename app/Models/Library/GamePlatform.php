@@ -37,13 +37,13 @@ class GamePlatform extends Pivot
         ];
     }
 
-    /** @return BelongsTo<Game, self> */
+    /** @return BelongsTo<Game, $this> */
     public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class, 'library_game_id');
     }
 
-    /** @return BelongsTo<Platform, self> */
+    /** @return BelongsTo<Platform, $this> */
     public function platform(): BelongsTo
     {
         return $this->belongsTo(Platform::class, 'library_platform_id');

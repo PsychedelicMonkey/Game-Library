@@ -195,6 +195,7 @@ class PostResource extends Resource
         ];
     }
 
+    /** @return Builder<Post> */
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
@@ -208,6 +209,7 @@ class PostResource extends Resource
         return ['title', 'slug', 'author.name', 'category.name'];
     }
 
+    /** @return Builder<Post> */
     public static function getGlobalSearchEloquentQuery(): Builder
     {
         return parent::getGlobalSearchEloquentQuery()->with(['author', 'category']);

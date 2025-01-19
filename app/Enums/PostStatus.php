@@ -13,7 +13,7 @@ enum PostStatus: string implements HasColor, HasIcon, HasLabel
     case Published = 'published';
     case Rejected = 'rejected';
 
-    public function getColor(): string|array|null
+    public function getColor(): string
     {
         return match ($this) {
             self::Draft => 'info',
@@ -23,7 +23,7 @@ enum PostStatus: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getIcon(): ?string
+    public function getIcon(): string
     {
         return match ($this) {
             self::Draft => 'heroicon-m-pencil',
@@ -33,7 +33,7 @@ enum PostStatus: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return $this->name;
     }

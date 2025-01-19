@@ -63,11 +63,11 @@ class GameResource extends Resource
                             ->schema([
                                 Forms\Components\Placeholder::make('created_at')
                                     ->label('Created at')
-                                    ->content(fn (Game $record): ?string => $record->created_at?->diffForHumans()),
+                                    ->content(fn (Game $record): string => $record->created_at->diffForHumans()),
 
                                 Forms\Components\Placeholder::make('updated_at')
                                     ->label('Last modified at')
-                                    ->content(fn (Game $record): ?string => $record->updated_at?->diffForHumans()),
+                                    ->content(fn (Game $record): string => $record->updated_at->diffForHumans()),
                             ])
                             ->hidden(fn (?Game $record) => $record === null),
                     ])
@@ -205,6 +205,7 @@ class GameResource extends Resource
         return ['name', 'slug'];
     }
 
+    /** @return Builder<Game> */
     public static function getGlobalSearchEloquentQuery(): Builder
     {
         return parent::getGlobalSearchEloquentQuery()->with(['developers', 'publishers']);

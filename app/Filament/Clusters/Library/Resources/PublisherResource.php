@@ -60,11 +60,11 @@ class PublisherResource extends Resource
                     ->schema([
                         Forms\Components\Placeholder::make('created_at')
                             ->label('Created at')
-                            ->content(fn (Publisher $record): ?string => $record->created_at?->diffForHumans()),
+                            ->content(fn (Publisher $record): string => $record->created_at->diffForHumans()),
 
                         Forms\Components\Placeholder::make('updated_at')
                             ->label('Last modified at')
-                            ->content(fn (Publisher $record): ?string => $record->updated_at?->diffForHumans()),
+                            ->content(fn (Publisher $record): string => $record->updated_at->diffForHumans()),
                     ])
                     ->columnSpan(['lg' => 1])
                     ->hidden(fn (?Publisher $record) => $record === null),

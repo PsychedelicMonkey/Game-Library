@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Blog\Author;
 use App\Models\Library\Review;
+use Carbon\CarbonInterface;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
@@ -19,11 +20,22 @@ use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Symfony\Component\Uid\Ulid;
 
+/**
+ * @property Ulid $id
+ * @property string $name
+ * @property string $email
+ * @property CarbonInterface $email_verified_at
+ * @property string $password
+ * @property string $remember_token
+ * @property CarbonInterface $created_at
+ * @property CarbonInterface $updated_at
+ */
 class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasApiTokens;
+    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use HasUlids;
     use InteractsWithMedia;
@@ -37,7 +49,9 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
     protected $fillable = [
         'name',
         'email',
+        'email_verified_at',
         'password',
+        'remember_token',
     ];
 
     /**
@@ -63,13 +77,13 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia
         ];
     }
 
-    /** @return HasOne<Author> */
+    /** @return HasOne<Author, $this> */
     public function author(): HasOne
     {
         return $this->hasOne(Author::class);
     }
 
-    /** @return HasMany<Review> */
+    /** @return HasMany<Review, $this> */
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);

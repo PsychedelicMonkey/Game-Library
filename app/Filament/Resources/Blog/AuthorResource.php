@@ -30,7 +30,7 @@ class AuthorResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
-                    ->disableOptionWhen(fn (string $value) => User::find($value)->author()->exists())
+                    ->disableOptionWhen(fn (string $value) => User::find($value)?->author()->exists())
                     ->relationship('user', 'name')
                     ->searchable(),
 
