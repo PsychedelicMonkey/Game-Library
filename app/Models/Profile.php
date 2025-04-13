@@ -21,6 +21,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property bool $is_public
  * @property CarbonInterface $created_at
  * @property CarbonInterface $updated_at
+ * @property User $user
  */
 class Profile extends Model implements HasMedia
 {

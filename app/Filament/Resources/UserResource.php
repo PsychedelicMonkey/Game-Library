@@ -190,6 +190,7 @@ class UserResource extends Resource
         return [
             Forms\Components\SpatieMediaLibraryFileUpload::make('avatar')
                 ->avatar()
+                ->circleCropper()
                 ->collection(Profile::AVATAR_COLLECTION)
                 ->image()
                 ->imageEditor(),
