@@ -31,6 +31,7 @@ class Profile extends Model implements HasMedia
     use InteractsWithMedia;
 
     public const AVATAR_COLLECTION = 'profile-avatars';
+    public const PHOTO_COLLECTION = 'profile-photos';
 
     /**
      * @var string
@@ -76,6 +77,8 @@ class Profile extends Model implements HasMedia
     {
         $this->addMediaCollection(self::AVATAR_COLLECTION)
             ->singleFile();
+
+        $this->addMediaCollection(self::PHOTO_COLLECTION);
     }
 
     public function registerMediaConversions(?Media $media = null): void

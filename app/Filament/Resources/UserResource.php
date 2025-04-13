@@ -10,8 +10,12 @@ use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Form;
+use Filament\Infolists\Components;
+use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
+use Filament\Pages\SubNavigationPosition;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -29,6 +33,8 @@ class UserResource extends Resource
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
+    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     public static function form(Form $form): Form
     {
@@ -59,6 +65,19 @@ class UserResource extends Resource
                         Forms\Components\Section::make('Profile')
                             ->relationship('profile')
                             ->schema(self::getProfileSchema()),
+
+                        Forms\Components\Section::make('Photos')
+                            ->relationship('profile')
+                            ->schema([
+                                Forms\Components\SpatieMediaLibraryFileUpload::make('photos')
+                                    ->collection(Profile::PHOTO_COLLECTION)
+                                    ->hiddenLabel()
+                                    ->image()
+                                    ->imageEditor()
+                                    ->multiple()
+                                    ->panelLayout('grid'),
+                            ])
+                            ->collapsible(),
                     ])
                     ->columnSpan(['lg' => fn (?User $record) => $record === null ? 3 : 2]),
 
@@ -113,7 +132,11 @@ class UserResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -121,6 +144,65 @@ class UserResource extends Resource
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
                 ]),
+            ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Components\Section::make()
+                    ->schema([
+                        Components\Split::make([
+                            Components\Group::make()
+                                ->relationship('profile')
+                                ->schema([
+                                    Components\SpatieMediaLibraryImageEntry::make('avatar')
+                                        ->circular()
+                                        ->collection(Profile::AVATAR_COLLECTION)
+                                        ->hiddenLabel()
+                                        ->grow(false),
+
+                                    Components\IconEntry::make('is_public')
+                                        ->boolean()
+                                        ->hiddenLabel()
+                                        ->falseIcon('heroicon-m-eye-slash')
+                                        ->trueIcon('heroicon-m-eye')
+                                        ->trueColor('gray')
+                                        ->falseColor('gray')
+                                        ->size(Components\IconEntry\IconEntrySize::TwoExtraLarge)
+                                        ->tooltip(fn (User $record) => $record->profile->is_public ? 'Public profile' : 'Private profile'),
+                                ]),
+                            Components\Grid::make(2)
+                                ->schema([
+                                    Components\TextEntry::make('name'),
+                                    Components\TextEntry::make('email'),
+                                    Components\TextEntry::make('created_at')
+                                        ->label('Date joined')
+                                        ->formatStateUsing(fn (User $record) => $record->created_at->format('F jS, Y')),
+                                    Components\TextEntry::make('updated_at')
+                                        ->label('Last modified at')
+                                        ->formatStateUsing(fn (User $record) => $record->updated_at->format('F jS, Y')),
+                                ]),
+                        ])->from('md'),
+                    ]),
+
+                Components\Section::make('Bio')
+                    ->relationship('profile')
+                    ->schema([
+                        Components\TextEntry::make('bio')
+                            ->hiddenLabel(),
+                    ])
+                    ->hidden(fn (User $record) => $record->profile->bio === null),
+
+                Components\Section::make('Photos')
+                    ->relationship('profile')
+                    ->schema([
+                        Components\SpatieMediaLibraryImageEntry::make('photos')
+                            ->collection(Profile::PHOTO_COLLECTION)
+                            ->hiddenLabel(),
+                    ])
+                    ->hidden(fn (User $record) => $record->photos()->count() === 0),
             ]);
     }
 
@@ -136,8 +218,19 @@ class UserResource extends Resource
         return [
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
+            'view' => Pages\ViewUser::route('/{record}'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
+            'photos' => Pages\ManageUserPhotos::route('/{record}/photos'),
         ];
+    }
+
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            Pages\ViewUser::class,
+            Pages\EditUser::class,
+            Pages\ManageUserPhotos::class,
+        ]);
     }
 
     /** @return Builder<User> */
