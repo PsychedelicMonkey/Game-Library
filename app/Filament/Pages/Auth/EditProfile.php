@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Pages\Auth;
 
+use App\Filament\Resources\UserResource;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -25,13 +26,7 @@ class EditProfile extends BaseEditProfile
 
                 Forms\Components\Section::make()
                     ->relationship('profile')
-                    ->schema([
-                        Forms\Components\Textarea::make('bio')
-                            ->maxLength(250),
-
-                        Forms\Components\Toggle::make('is_public')
-                            ->label('Visible to public'),
-                    ]),
+                    ->schema(UserResource::getProfileSchema()),
             ]);
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
+use App\Models\Profile;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Actions\Action;
@@ -187,6 +188,12 @@ class UserResource extends Resource
     public static function getProfileSchema(): array
     {
         return [
+            Forms\Components\SpatieMediaLibraryFileUpload::make('avatar')
+                ->avatar()
+                ->collection(Profile::AVATAR_COLLECTION)
+                ->image()
+                ->imageEditor(),
+
             Forms\Components\Textarea::make('bio')
                 ->maxLength(250),
 
