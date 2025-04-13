@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,10 +13,30 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property string $id
+ * @property string $name
+ * @property string $email
+ * @property ?CarbonInterface $email_verified_at
+ * @property string $password
+ * @property ?string $remember_token
+ * @property CarbonInterface $created_at
+ * @property CarbonInterface $updated_at
+ * @property ?CarbonInterface $deleted_at
+ */
 class User extends Authenticatable
 {
+    use HasApiTokens;
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasApiTokens, HasFactory, HasUlids, Notifiable, SoftDeletes;
+    use HasFactory;
+    use HasUlids;
+    use Notifiable;
+    use SoftDeletes;
+
+    /**
+     * @var string
+     */
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +46,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'email_verified_at',
         'password',
+        'remember_token',
     ];
 
     /**
