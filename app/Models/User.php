@@ -10,6 +10,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -25,6 +26,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property CarbonInterface $created_at
  * @property CarbonInterface $updated_at
  * @property ?CarbonInterface $deleted_at
+ * @property Profile $profile
  */
 class User extends Authenticatable implements FilamentUser
 {
@@ -74,6 +76,21 @@ class User extends Authenticatable implements FilamentUser
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /** @return HasOne<Profile, $this> */
+    public function profile(): HasOne
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    protected static function booted(): void
+    {
+        parent::booted();
+
+        static::created(function (User $user) {
+            $user->profile()->create();
+        });
     }
 
     public function canAccessPanel(Panel $panel): bool
