@@ -14,8 +14,12 @@ use function Illuminate\Events\queueable;
 
 class User extends Authenticatable
 {
+    use Billable;
+    use HasApiTokens;
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use Billable, HasApiTokens, HasFactory, HasRoles, Notifiable;
+    use HasFactory;
+    use HasRoles;
+    use Notifiable;
 
     /**
      * The model's default values for attributes.
