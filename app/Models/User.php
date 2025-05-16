@@ -10,10 +10,24 @@ use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
+use function Illuminate\Events\queueable;
+
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use Billable, HasApiTokens, HasFactory, HasRoles, Notifiable;
+
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array<string, mixed>
+     */
+    protected $attributes = [
+        'stripe_id' => null,
+        'pm_type' => null,
+        'pm_last_four' => null,
+        'trial_ends_at' => null,
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -47,5 +61,16 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        parent::booted();
+
+        static::updated(queueable(function (User $customer) {
+            if ($customer->hasStripeId()) {
+                $customer->syncStripeCustomerDetails();
+            }
+        }));
     }
 }
