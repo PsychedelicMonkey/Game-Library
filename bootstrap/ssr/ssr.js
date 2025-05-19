@@ -348,7 +348,9 @@ createServer(
     resolve: (name) => resolvePageComponent(`./pages/${name}.tsx`, /* @__PURE__ */ Object.assign({ "./pages/welcome.tsx": () => import("./assets/welcome-D2kp_rUs.js") })),
     setup({ App, props }) {
       global.route = (name, props2, absolute) => T(name, params, absolute, {
+        // @ts-expect-error
         ...page.props.ziggy,
+        // @ts-expect-error
         location: new URL(page.props.ziggy.location)
       });
       return /* @__PURE__ */ jsx(App, { ...props });
