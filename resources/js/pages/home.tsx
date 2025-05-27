@@ -7,6 +7,7 @@ export default function Home() {
 
             <div className="mx-auto max-w-7xl">
                 <h1 className="text-3xl font-semibold text-gray-900">Home Page</h1>
+                <h3>{route('home')}</h3>
             </div>
         </>
     );
