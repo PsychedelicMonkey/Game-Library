@@ -9,8 +9,8 @@
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
     @routes
-    @vitereactrefresh
-    @vite(['resources/css/app.css', 'resources/js/app.tsx'])
+    @viteReactRefresh
+    @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
     @inertiaHead
 </head>
 <body>
