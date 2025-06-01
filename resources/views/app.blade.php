@@ -8,6 +8,7 @@
 
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
+    @routes
     @vitereactrefresh
     @vite(['resources/css/app.css', 'resources/js/app.tsx'])
     @inertiaHead
