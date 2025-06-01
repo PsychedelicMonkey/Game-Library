@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
+use Inertia\Response;
+
+class AuthenticatedSessionController extends Controller
+{
+    /**
+     * Return the login page.
+     */
+    public function create(): Response
+    {
+        return Inertia::render('auth/login');
+    }
+
+    /**
+     * Handle an incoming authentication request.
+     *
+     * @throws ValidationException
+     */
+    public function store(LoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+
+        $request->session()->regenerate();
+
+        return redirect()->intended(route('home', absolute: false));
+    }
+
+    /**
+     * Handle an incoming logout request.
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+}
