@@ -1,3 +1,4 @@
+import Input from '@/components/input';
 import InputError from '@/components/input-error';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
@@ -5,12 +6,14 @@ import { FormEventHandler } from 'react';
 type LoginForm = {
     email: string;
     password: string;
+    remember: boolean;
 };
 
 function LoginHero() {
     const { data, setData, errors, post, processing, reset } = useForm<LoginForm>({
         email: '',
         password: '',
+        remember: false,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -36,19 +39,19 @@ function LoginHero() {
                         <form onSubmit={submit}>
                             <fieldset className="fieldset">
                                 <label className="label">Email</label>
-                                <input
+                                <Input
                                     type="email"
-                                    className="input"
                                     placeholder="Email"
+                                    autoComplete="email"
                                     value={data.email}
                                     onChange={(e) => setData('email', e.target.value)}
                                 />
                                 <InputError message={errors.email} />
                                 <label className="label">Password</label>
-                                <input
+                                <Input
                                     type="password"
-                                    className="input"
                                     placeholder="Password"
+                                    autoComplete="current-password"
                                     value={data.password}
                                     onChange={(e) => setData('password', e.target.value)}
                                 />
@@ -58,6 +61,18 @@ function LoginHero() {
                                         Forgot password?
                                     </Link>
                                 </div>
+                                <label className="label">
+                                    <input
+                                        type="checkbox"
+                                        name="remember"
+                                        id="remember"
+                                        className="checkbox"
+                                        defaultChecked
+                                        checked={data.remember}
+                                        onClick={() => setData('remember', !data.remember)}
+                                    />
+                                    Remember me
+                                </label>
                                 <button type="submit" className="btn mt-4 btn-neutral" disabled={processing}>
                                     Login
                                 </button>
