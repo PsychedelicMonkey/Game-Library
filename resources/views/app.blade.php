@@ -9,7 +9,7 @@
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
     @vitereactrefresh
-    @vite(['resources/js/app.jsx'])
+    @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
     @inertiaHead
 </head>
 <body>

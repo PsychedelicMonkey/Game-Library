@@ -10,7 +10,7 @@ createServer(page =>
         page,
         title: title => `${title} - ${appName}`,
         render: ReactDOMServer.renderToString,
-        resolve: name => resolvePageComponent(`./pages/${name}.jsx`, import.meta.glob('./pages/**/*.jsx')),
+        resolve: name => resolvePageComponent(`./pages/${name}.tsx`, import.meta.glob('./pages/**/*.tsx')),
         setup: ({ App, props }) => <App {...props} />,
     }),
 )
