@@ -9,7 +9,7 @@ use Inertia\Response;
 
 class RegistrationContoller extends Controller
 {
-    public function create():Response
+    public function create(): Response
     {
         return Inertia::render('auth/register');
     }

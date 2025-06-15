@@ -9,7 +9,7 @@ use Inertia\Response;
 
 class AuthenticatedSessionController extends Controller
 {
-    public function create():Response
+    public function create(): Response
     {
         return Inertia::render('auth/login');
     }
