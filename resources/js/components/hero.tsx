@@ -1,6 +1,7 @@
 import { Button } from '@/components/button';
 import Input from '@/components/input';
 import InputError from '@/components/input-error';
+import { Loading } from '@/components/loading';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
@@ -77,6 +78,7 @@ function LoginHero() {
                                     Remember me
                                 </label>
                                 <Button type="submit" className="btn mt-4 btn-neutral" disabled={processing}>
+                                    {processing && <Loading />}
                                     Login
                                 </Button>
                             </fieldset>

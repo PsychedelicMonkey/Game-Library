@@ -1,6 +1,7 @@
 import { Button } from '@/components/button';
 import Input from '@/components/input';
 import InputError from '@/components/input-error';
+import { Loading } from '@/components/loading';
 import { AppLayout } from '@/layouts/app-layout';
 import { Head, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
@@ -82,6 +83,7 @@ export default function Login() {
                     </fieldset>
 
                     <Button type="submit" disabled={processing} color="primary">
+                        {processing && <Loading size="sm" />}
                         Login
                     </Button>
                 </form>
