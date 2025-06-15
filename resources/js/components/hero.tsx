@@ -78,7 +78,7 @@ function LoginHero() {
                                     Remember me
                                 </label>
                                 <Button type="submit" className="btn mt-4 btn-neutral" disabled={processing}>
-                                    {processing && <Loading />}
+                                    {processing && <Loading size="sm" />}
                                     Login
                                 </Button>
                             </fieldset>
