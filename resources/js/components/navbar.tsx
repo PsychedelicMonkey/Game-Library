@@ -35,7 +35,9 @@ function Navbar() {
                                     <a>Settings</a>
                                 </li>
                                 <li>
-                                    <a>Logout</a>
+                                    <Link href={route('logout')} method="post" as="button">
+                                        Logout
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
