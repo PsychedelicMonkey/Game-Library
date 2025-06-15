@@ -5,17 +5,17 @@ export interface Auth {
 }
 
 export interface SharedData {
-    name:string;
+    name: string;
     auth: Auth;
-    ziggy: Config & {location: string}
-    [key:string]: unknown;
+    ziggy: Config & { location: string };
+    [key: string]: unknown;
 }
 
 export interface User {
-    id:number;
-    name:string;
-    email:string;
+    id: number;
+    name: string;
+    email: string;
     email_verified_at: string | null;
-    created_at:string;
-    updated_at:string;
+    created_at: string;
+    updated_at: string;
 }
