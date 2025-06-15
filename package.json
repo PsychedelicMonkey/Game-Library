@@ -19,6 +19,7 @@
         "@vitejs/plugin-react": "^4.5.2",
         "clsx": "^2.1.1",
         "concurrently": "^9.0.1",
+        "daisyui": "^5.0.43",
         "globals": "^16.2.0",
         "laravel-vite-plugin": "^1.2.0",
         "react": "^19.1.0",
