@@ -1,3 +1,4 @@
+import { Button } from '@/components/button';
 import Input from '@/components/input';
 import InputError from '@/components/input-error';
 import { AppLayout } from '@/layouts/app-layout';
@@ -80,9 +81,9 @@ export default function Login() {
                         </label>
                     </fieldset>
 
-                    <button type="submit" className="btn btn-primary" disabled={processing}>
+                    <Button type="submit" disabled={processing} color="primary">
                         Login
-                    </button>
+                    </Button>
                 </form>
             </div>
         </AppLayout>

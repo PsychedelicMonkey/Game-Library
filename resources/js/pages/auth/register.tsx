@@ -1,3 +1,4 @@
+import { Button } from '@/components/button';
 import Input from '@/components/input';
 import InputError from '@/components/input-error';
 import { AppLayout } from '@/layouts/app-layout';
@@ -96,9 +97,9 @@ export default function Register() {
                         <InputError message={errors.password_confirmation} />
                     </fieldset>
 
-                    <button type="submit" className="btn btn-primary" disabled={processing}>
+                    <Button type="submit" disabled={processing} color="primary">
                         Register
-                    </button>
+                    </Button>
                 </form>
             </div>
         </AppLayout>
