@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'except' => ['sanctum.*'],
+    'except' => ['cashier.*', 'sanctum.*', 'telescope'],
 ];
