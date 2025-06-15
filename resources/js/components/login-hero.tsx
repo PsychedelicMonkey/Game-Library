@@ -45,6 +45,7 @@ function LoginHero() {
                                     autoComplete="email"
                                     value={data.email}
                                     onChange={(e) => setData('email', e.target.value)}
+                                    disabled={processing}
                                 />
                                 <InputError message={errors.email} />
                                 <label className="label">Password</label>
@@ -54,6 +55,7 @@ function LoginHero() {
                                     autoComplete="current-password"
                                     value={data.password}
                                     onChange={(e) => setData('password', e.target.value)}
+                                    disabled={processing}
                                 />
                                 <InputError message={errors.password} />
                                 <div>
@@ -67,9 +69,9 @@ function LoginHero() {
                                         name="remember"
                                         id="remember"
                                         className="checkbox"
-                                        defaultChecked
                                         checked={data.remember}
                                         onClick={() => setData('remember', !data.remember)}
+                                        disabled={processing}
                                     />
                                     Remember me
                                 </label>

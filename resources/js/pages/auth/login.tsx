@@ -45,6 +45,8 @@ export default function Login() {
                             autoComplete="email"
                             value={data.email}
                             onChange={(e) => setData('email', e.target.value)}
+                            disabled={processing}
+                            placeholder="email@example.com"
                         />
                         <InputError message={errors.email} />
 
@@ -58,6 +60,8 @@ export default function Login() {
                             autoComplete="current-password"
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
+                            disabled={processing}
+                            placeholder="Password"
                         />
                         <InputError message={errors.password} />
 
@@ -67,9 +71,10 @@ export default function Login() {
                                 name="remember"
                                 id="remember"
                                 className="checkbox"
+                                tabIndex={3}
                                 checked={data.remember}
                                 onClick={() => setData('remember', !data.remember)}
-                                tabIndex={3}
+                                disabled={processing}
                             />
                             Remember me
                         </label>
