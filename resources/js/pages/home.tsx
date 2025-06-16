@@ -1,3 +1,5 @@
+import { Alert } from '@/components/alert';
+import { Badge } from '@/components/badge';
 import { Button } from '@/components/button';
 import { ImageHero, LoginHero } from '@/components/hero';
 import { Loading } from '@/components/loading';
@@ -150,13 +152,137 @@ export default function Home() {
                         Hello
                     </Button>
                 </div>
-                <div>
+                <div className="flex gap-2">
+                    <Badge>New</Badge>
+                    <Badge color="primary">New</Badge>
+                    <Badge color="secondary">New</Badge>
+                    <Badge color="accent">New</Badge>
+                    <Badge color="info">New</Badge>
+                    <Badge color="success">New</Badge>
+                    <Badge color="warning">New</Badge>
+                    <Badge color="error">New</Badge>
+                </div>
+                <div className="flex gap-2">
+                    <Badge badgeStyle="dash">New</Badge>
+                    <Badge color="primary" badgeStyle="dash">
+                        New
+                    </Badge>
+                    <Badge color="secondary" badgeStyle="dash">
+                        New
+                    </Badge>
+                    <Badge color="accent" badgeStyle="dash">
+                        New
+                    </Badge>
+                    <Badge color="info" badgeStyle="dash">
+                        New
+                    </Badge>
+                    <Badge color="success" badgeStyle="dash">
+                        New
+                    </Badge>
+                    <Badge color="warning" badgeStyle="dash">
+                        New
+                    </Badge>
+                    <Badge color="error" badgeStyle="dash">
+                        New
+                    </Badge>
+                </div>
+                <div className="flex gap-2">
+                    <Badge badgeStyle="outline">New</Badge>
+                    <Badge color="primary" badgeStyle="outline">
+                        New
+                    </Badge>
+                    <Badge color="secondary" badgeStyle="outline">
+                        New
+                    </Badge>
+                    <Badge color="accent" badgeStyle="outline">
+                        New
+                    </Badge>
+                    <Badge color="info" badgeStyle="outline">
+                        New
+                    </Badge>
+                    <Badge color="success" badgeStyle="outline">
+                        New
+                    </Badge>
+                    <Badge color="warning" badgeStyle="outline">
+                        New
+                    </Badge>
+                    <Badge color="error" badgeStyle="outline">
+                        New
+                    </Badge>
+                </div>
+                <div className="flex gap-2">
+                    <Badge badgeStyle="soft">New</Badge>
+                    <Badge color="primary" badgeStyle="soft">
+                        New
+                    </Badge>
+                    <Badge color="secondary" badgeStyle="soft">
+                        New
+                    </Badge>
+                    <Badge color="accent" badgeStyle="soft">
+                        New
+                    </Badge>
+                    <Badge color="info" badgeStyle="soft">
+                        New
+                    </Badge>
+                    <Badge color="success" badgeStyle="soft">
+                        New
+                    </Badge>
+                    <Badge color="warning" badgeStyle="soft">
+                        New
+                    </Badge>
+                    <Badge color="error" badgeStyle="soft">
+                        New
+                    </Badge>
+                </div>
+                <div className="flex gap-2">
+                    <Badge badgeStyle="ghost">New</Badge>
+                    <Badge color="primary" badgeStyle="ghost">
+                        New
+                    </Badge>
+                    <Badge color="secondary" badgeStyle="ghost">
+                        New
+                    </Badge>
+                    <Badge color="accent" badgeStyle="ghost">
+                        New
+                    </Badge>
+                    <Badge color="info" badgeStyle="ghost">
+                        New
+                    </Badge>
+                    <Badge color="success" badgeStyle="ghost">
+                        New
+                    </Badge>
+                    <Badge color="warning" badgeStyle="ghost">
+                        New
+                    </Badge>
+                    <Badge color="error" badgeStyle="ghost">
+                        New
+                    </Badge>
+                </div>
+                <div className="flex gap-2">
                     <Loading />
                     <Loading type="dots" />
                     <Loading type="ball" />
                     <Loading type="bars" />
                     <Loading type="ring" />
                     <Loading type="infinity" className="text-primary" />
+                </div>
+                <div className="flex flex-col gap-4">
+                    <Alert color="info" message="Info message" icon />
+                    <Alert color="success" message="Success message" icon />
+                    <Alert color="warning" message="Warning message" icon />
+                    <Alert color="error" message="Error message" icon />
+                </div>
+                <div className="flex flex-col gap-4">
+                    <Alert color="info" message="Info message" alertStyle="soft" />
+                    <Alert color="success" message="Success message" alertStyle="soft" />
+                    <Alert color="warning" message="Warning message" alertStyle="soft" />
+                    <Alert color="error" message="Error message" alertStyle="soft" />
+                </div>
+                <div className="flex flex-col gap-4">
+                    <Alert color="info" message="Info message" alertStyle="outline" />
+                    <Alert color="success" message="Success message" alertStyle="outline" />
+                    <Alert color="warning" message="Warning message" alertStyle="outline" />
+                    <Alert color="error" message="Error message" alertStyle="outline" />
                 </div>
             </div>
         </AppLayout>
