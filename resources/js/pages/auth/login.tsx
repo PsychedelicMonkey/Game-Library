@@ -1,6 +1,7 @@
 import { Button } from '@/components/button';
 import Input from '@/components/input';
 import InputError from '@/components/input-error';
+import { InputLabel } from '@/components/input-label';
 import { Loading } from '@/components/loading';
 import { AppLayout } from '@/layouts/app-layout';
 import { Head, useForm } from '@inertiajs/react';
@@ -36,7 +37,7 @@ export default function Login() {
 
                 <form onSubmit={submit}>
                     <fieldset className="fieldset">
-                        <label htmlFor="email">Email address</label>
+                        <InputLabel htmlFor="email">Email address</InputLabel>
                         <Input
                             type="email"
                             name="email"
@@ -52,7 +53,7 @@ export default function Login() {
                         />
                         <InputError message={errors.email} />
 
-                        <label htmlFor="password">Password</label>
+                        <InputLabel htmlFor="password">Password</InputLabel>
                         <Input
                             type="password"
                             name="password"
@@ -67,7 +68,7 @@ export default function Login() {
                         />
                         <InputError message={errors.password} />
 
-                        <label className="label">
+                        <InputLabel>
                             <input
                                 type="checkbox"
                                 name="remember"
@@ -79,7 +80,7 @@ export default function Login() {
                                 disabled={processing}
                             />
                             Remember me
-                        </label>
+                        </InputLabel>
                     </fieldset>
 
                     <Button type="submit" disabled={processing} color="primary">

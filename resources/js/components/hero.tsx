@@ -1,6 +1,7 @@
 import { Button } from '@/components/button';
 import Input from '@/components/input';
 import InputError from '@/components/input-error';
+import { InputLabel } from '@/components/input-label';
 import { Loading } from '@/components/loading';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
@@ -40,9 +41,11 @@ function LoginHero() {
                     <div className="card-body">
                         <form onSubmit={submit}>
                             <fieldset className="fieldset">
-                                <label className="label">Email</label>
+                                <InputLabel htmlFor="email">Email</InputLabel>
                                 <Input
                                     type="email"
+                                    id="email"
+                                    name="email"
                                     placeholder="Email"
                                     autoComplete="email"
                                     value={data.email}
@@ -50,9 +53,11 @@ function LoginHero() {
                                     disabled={processing}
                                 />
                                 <InputError message={errors.email} />
-                                <label className="label">Password</label>
+                                <InputLabel htmlFor="password">Password</InputLabel>
                                 <Input
                                     type="password"
+                                    id="password"
+                                    name="password"
                                     placeholder="Password"
                                     autoComplete="current-password"
                                     value={data.password}
@@ -65,7 +70,7 @@ function LoginHero() {
                                         Forgot password?
                                     </Link>
                                 </div>
-                                <label className="label">
+                                <InputLabel>
                                     <input
                                         type="checkbox"
                                         name="remember"
@@ -76,7 +81,7 @@ function LoginHero() {
                                         disabled={processing}
                                     />
                                     Remember me
-                                </label>
+                                </InputLabel>
                                 <Button type="submit" className="btn mt-4 btn-neutral" disabled={processing}>
                                     {processing && <Loading size="sm" />}
                                     Login

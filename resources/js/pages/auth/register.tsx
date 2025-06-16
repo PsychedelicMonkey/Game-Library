@@ -1,6 +1,7 @@
 import { Button } from '@/components/button';
 import Input from '@/components/input';
 import InputError from '@/components/input-error';
+import { InputLabel } from '@/components/input-label';
 import { Loading } from '@/components/loading';
 import { AppLayout } from '@/layouts/app-layout';
 import { Head, useForm } from '@inertiajs/react';
@@ -38,7 +39,7 @@ export default function Register() {
 
                 <form onSubmit={submit}>
                     <fieldset className="fieldset">
-                        <label htmlFor="name">Name</label>
+                        <InputLabel htmlFor="name">Name</InputLabel>
                         <Input
                             type="text"
                             name="name"
@@ -53,7 +54,7 @@ export default function Register() {
                         />
                         <InputError message={errors.name} />
 
-                        <label htmlFor="email">Email address</label>
+                        <InputLabel htmlFor="email">Email address</InputLabel>
                         <Input
                             type="email"
                             name="email"
@@ -68,7 +69,7 @@ export default function Register() {
                         />
                         <InputError message={errors.email} />
 
-                        <label htmlFor="password">Password</label>
+                        <InputLabel htmlFor="password">Password</InputLabel>
                         <Input
                             type="password"
                             name="password"
@@ -83,7 +84,7 @@ export default function Register() {
                         />
                         <InputError message={errors.password} />
 
-                        <label htmlFor="password_confirmation">Password confirmation</label>
+                        <InputLabel htmlFor="password_confirmation">Password confirmation</InputLabel>
                         <Input
                             type="password"
                             name="password_confirmation"
