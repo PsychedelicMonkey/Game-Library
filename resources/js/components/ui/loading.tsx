@@ -4,6 +4,16 @@ import React from 'react';
 
 const loadingVariants = cva('loading', {
     variants: {
+        color: {
+            primary: 'text-primary',
+            secondary: 'text-secondary',
+            accent: 'text-accent',
+            neutral: 'text-neutral',
+            info: 'text-info',
+            success: 'text-success',
+            warning: 'text-warning',
+            error: 'text-error',
+        },
         type: {
             spinner: 'loading-spinner',
             dots: 'loading-dots',
@@ -25,8 +35,8 @@ const loadingVariants = cva('loading', {
     },
 });
 
-function Loading({ className, type, size }: React.ComponentProps<'span'> & VariantProps<typeof loadingVariants>) {
-    return <span className={cn(loadingVariants({ type, size, className }))}></span>;
+function Loading({ className, color, type, size }: React.ComponentProps<'span'> & VariantProps<typeof loadingVariants>) {
+    return <span className={cn(loadingVariants({ color, type, size, className }))}></span>;
 }
 
 export { Loading, loadingVariants };

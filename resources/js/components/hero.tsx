@@ -1,8 +1,8 @@
-import { Button } from '@/components/button';
-import Input from '@/components/input';
-import InputError from '@/components/input-error';
-import { InputLabel } from '@/components/input-label';
-import { Loading } from '@/components/loading';
+import { Button } from '@/components/ui/button';
+import Input from '@/components/ui/input';
+import InputError from '@/components/ui/input-error';
+import { InputLabel } from '@/components/ui/input-label';
+import { Loading } from '@/components/ui/loading';
 import { Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
@@ -82,7 +82,7 @@ function LoginHero() {
                                     />
                                     Remember me
                                 </InputLabel>
-                                <Button type="submit" className="btn mt-4 btn-neutral" disabled={processing}>
+                                <Button type="submit" className="mt-4" color="neutral" disabled={processing}>
                                     {processing && <Loading size="sm" />}
                                     Login
                                 </Button>

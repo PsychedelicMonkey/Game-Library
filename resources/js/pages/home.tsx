@@ -1,8 +1,10 @@
-import { Alert } from '@/components/alert';
-import { Badge } from '@/components/badge';
-import { Button } from '@/components/button';
 import { ImageHero, LoginHero } from '@/components/hero';
-import { Loading } from '@/components/loading';
+import { Alert } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import FileInput from '@/components/ui/file-input';
+import { Loading } from '@/components/ui/loading';
+import Progress from '@/components/ui/progress';
 import { AppLayout } from '@/layouts/app-layout';
 import { SharedData } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
@@ -264,7 +266,25 @@ export default function Home() {
                     <Loading type="ball" />
                     <Loading type="bars" />
                     <Loading type="ring" />
-                    <Loading type="infinity" className="text-primary" />
+                    <Loading type="infinity" />
+                </div>
+                <div className="flex gap-2">
+                    <Loading size="xl" />
+                    <Loading type="dots" size="xl" />
+                    <Loading type="ball" size="xl" />
+                    <Loading type="bars" size="xl" />
+                    <Loading type="ring" size="xl" />
+                    <Loading type="infinity" size="xl" />
+                </div>
+                <div className="flex gap-2">
+                    <Loading color="neutral" />
+                    <Loading color="primary" />
+                    <Loading color="secondary" />
+                    <Loading color="accent" />
+                    <Loading color="info" />
+                    <Loading color="success" />
+                    <Loading color="warning" />
+                    <Loading color="error" />
                 </div>
                 <div className="flex flex-col gap-4">
                     <Alert color="info" message="Info message" icon />
@@ -283,6 +303,16 @@ export default function Home() {
                     <Alert color="success" message="Success message" alertStyle="outline" />
                     <Alert color="warning" message="Warning message" alertStyle="outline" />
                     <Alert color="error" message="Error message" alertStyle="outline" />
+                </div>
+                <div className="flex flex-col gap-4">
+                    <Progress />
+                    <Progress color="primary" />
+                    <Progress color="secondary" value={20} max="100" />
+                </div>
+                <div className="flex gap-4">
+                    <FileInput />
+                    <FileInput color="success" />
+                    <FileInput size="xl" />
                 </div>
             </div>
         </AppLayout>

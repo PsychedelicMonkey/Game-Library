@@ -1,8 +1,8 @@
-import { Button } from '@/components/button';
-import Input from '@/components/input';
-import InputError from '@/components/input-error';
-import { InputLabel } from '@/components/input-label';
-import { Loading } from '@/components/loading';
+import { Button } from '@/components/ui/button';
+import Input from '@/components/ui/input';
+import InputError from '@/components/ui/input-error';
+import { InputLabel } from '@/components/ui/input-label';
+import { Loading } from '@/components/ui/loading';
 import { AppLayout } from '@/layouts/app-layout';
 import { Head, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';

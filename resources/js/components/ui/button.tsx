@@ -5,7 +5,7 @@ import * as React from 'react';
 const buttonVariants = cva('btn', {
     variants: {
         color: {
-            default: 'btn-neutral',
+            neutral: 'btn-neutral',
             primary: 'btn-primary',
             secondary: 'btn-secondary',
             accent: 'btn-accent',
@@ -35,7 +35,7 @@ const buttonVariants = cva('btn', {
         },
     },
     defaultVariants: {
-        color: 'default',
+        color: 'neutral',
         size: 'md',
     },
 });
