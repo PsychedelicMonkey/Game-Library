@@ -1,10 +1,11 @@
+import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import InputError from '@/components/ui/input-error';
 import { InputLabel } from '@/components/ui/input-label';
 import { Loading } from '@/components/ui/loading';
 import { AppLayout } from '@/layouts/app-layout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
 type LoginForm = {
@@ -13,7 +14,12 @@ type LoginForm = {
     remember: boolean;
 };
 
-export default function Login() {
+interface LoginProps {
+    canResetPassword: boolean;
+    status?: string;
+}
+
+export default function Login({ canResetPassword, status }: LoginProps) {
     const { data, setData, errors, post, processing, reset } = useForm<LoginForm>({
         email: '',
         password: '',
@@ -33,6 +39,8 @@ export default function Login() {
             <Head title="Login" />
 
             <div className="mx-auto max-w-7xl p-4 lg:p-6">
+                {status && <Alert message={status} color="success" icon />}
+
                 <h1 className="text-3xl font-semibold">Login</h1>
 
                 <form onSubmit={submit}>
@@ -81,6 +89,12 @@ export default function Login() {
                             />
                             Remember me
                         </InputLabel>
+
+                        {canResetPassword && (
+                            <Link href={route('password.request')} className="link link-hover">
+                                Forgot your password?
+                            </Link>
+                        )}
                     </fieldset>
 
                     <Button type="submit" disabled={processing} color="primary">

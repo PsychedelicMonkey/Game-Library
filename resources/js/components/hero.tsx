@@ -66,7 +66,7 @@ function LoginHero() {
                                 />
                                 <InputError message={errors.password} />
                                 <div>
-                                    <Link href={route('forgot-password')} className="link link-hover">
+                                    <Link href={route('password.request')} className="link link-hover">
                                         Forgot password?
                                     </Link>
                                 </div>
