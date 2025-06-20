@@ -12,9 +12,10 @@ function Navbar() {
                 </Link>
             </div>
             <div className="flex gap-2">
+                <input type="text" placeholder="Search" className="input-bordered input w-24 md:w-auto" />
+
                 {auth.user ? (
                     <>
-                        <input type="text" placeholder="Search" className="input-bordered input w-24 md:w-auto" />
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn avatar btn-circle btn-ghost">
                                 <div className="w-10 rounded-full">
