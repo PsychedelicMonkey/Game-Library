@@ -22,7 +22,7 @@ class AccountController extends Controller
     }
 
     /**
-     * Update the user's profile settings.
+     * Update the user's account settings.
      */
     public function update(AccountUpdateRequest $request): RedirectResponse
     {

@@ -4,6 +4,15 @@ export interface Auth {
     user: User;
 }
 
+export interface Profile {
+    id: string;
+    username: string;
+    bio: string | null;
+    is_public: boolean;
+    created_at: string;
+    updated_at: string;
+}
+
 export interface SharedData {
     name: string;
     auth: Auth;
@@ -16,6 +25,7 @@ export interface User {
     name: string;
     email: string;
     email_verified_at: string | null;
+    profile: profile;
     created_at: string;
     updated_at: string;
 }

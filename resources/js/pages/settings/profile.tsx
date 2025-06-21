@@ -1,57 +1,50 @@
-import { Button } from '@/components/ui/button';
-import Input from '@/components/ui/input';
-import InputError from '@/components/ui/input-error';
-import { InputLabel } from '@/components/ui/input-label';
-import { Loading } from '@/components/ui/loading';
 import { AppLayout } from '@/layouts/app-layout';
-import { SharedData } from '@/types';
-import { Head, useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
-
-type ProfileForm = {
-    name: string;
-    email: string;
-};
+import AccountForm from '@/pages/settings/account-form';
+import ProfileForm from '@/pages/settings/profile-form';
+import { Head } from '@inertiajs/react';
 
 export default function Profile() {
-    const { auth } = usePage<SharedData>().props;
-
-    const { data, setData, errors, patch, processing } = useForm<Required<ProfileForm>>({
-        name: auth.user.name,
-        email: auth.user.email,
-    });
-
-    const submit: FormEventHandler = (e) => {
-        e.preventDefault();
-
-        patch(route('account.update'), {
-            preserveScroll: true,
-        });
-    };
-
     return (
         <AppLayout>
             <Head title="Profile" />
 
-            <div className="mx-auto max-w-7xl p-4 lg:p-6">
-                <h1 className="text-3xl font-semibold">Profile</h1>
+            {/* name of each tab group should be unique */}
+            <div className="tabs-border tabs">
+                <input type="radio" name="profile_tabs" className="tab" aria-label="Account Settings" defaultChecked />
+                <div className="tab-content border-base-300 bg-base-100 p-10">
+                    <div className="mx-auto max-w-7xl p-4 lg:p-6">
+                        <h1 className="text-3xl font-semibold">Account Settings</h1>
 
-                <form onSubmit={submit}>
-                    <fieldset className="fieldset">
-                        <InputLabel htmlFor="name">Name</InputLabel>
-                        <Input type="text" name="name" id="name" value={data.name} onChange={(e) => setData('name', e.target.value)} />
-                        <InputError message={errors.name} />
+                        <AccountForm />
+                    </div>
+                </div>
 
-                        <InputLabel htmlFor="email">Email address</InputLabel>
-                        <Input type="email" name="email" id="email" value={data.email} onChange={(e) => setData('email', e.target.value)} />
-                        <InputError message={errors.email} />
-                    </fieldset>
+                <input type="radio" name="profile_tabs" className="tab" aria-label="Profile Settings" />
+                <div className="tab-content border-base-300 bg-base-100 p-10">
+                    <div className="mx-auto max-w-7xl p-4 lg:p-6">
+                        <h1 className="text-3xl font-semibold">Profile Settings</h1>
 
-                    <Button type="submit" color="primary" disabled={processing}>
-                        {processing && <Loading size="sm" />}
-                        Save
-                    </Button>
-                </form>
+                        <ProfileForm />
+                    </div>
+                </div>
+
+                <input type="radio" name="profile_tabs" className="tab" aria-label="Change Password" />
+                <div className="tab-content border-base-300 bg-base-100 p-10">
+                    <div className="mx-auto max-w-7xl p-4 lg:p-6">
+                        <h1 className="text-3xl font-semibold">Change Password</h1>
+
+                        {/*    Content*/}
+                    </div>
+                </div>
+
+                <input type="radio" name="profile_tabs" className="tab" aria-label="Manage Subscription" />
+                <div className="tab-content border-base-300 bg-base-100 p-10">
+                    <div className="mx-auto max-w-7xl p-4 lg:p-6">
+                        <h1 className="text-3xl font-semibold">Manage Subscription</h1>
+
+                        {/*    Content*/}
+                    </div>
+                </div>
             </div>
         </AppLayout>
     );

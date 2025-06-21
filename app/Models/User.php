@@ -21,6 +21,7 @@ use function Illuminate\Events\queueable;
  * @property ?CarbonInterface $email_verified_at
  * @property string $password
  * @property ?string $remember_token
+ * @property Profile $profile
  * @property CarbonInterface $created_at
  * @property CarbonInterface $updated_at
  */

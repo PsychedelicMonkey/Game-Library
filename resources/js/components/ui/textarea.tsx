@@ -30,5 +30,5 @@ export default function Textarea({
     textareaSize,
     ...props
 }: React.ComponentProps<'textarea'> & VariantProps<typeof textareaVariant>) {
-    return <textarea className={cn(textareaVariant, color, textareaSize, className)} {...props}></textarea>;
+    return <textarea className={cn(textareaVariant({ color, textareaSize, className }))} {...props}></textarea>;
 }
