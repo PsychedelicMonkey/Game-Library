@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
+class Profile extends Model implements HasMedia
+{
+    /** @use HasFactory<\Database\Factories\ProfileFactory> */
+    use HasFactory, InteractsWithMedia;
+
+    /**
+     * @var string
+     */
+    protected $table = 'user_profiles';
+
+    /**
+     * @var list<string>
+     */
+    protected $fillable = [
+        'user_id',
+        'username',
+        'bio',
+        'is_public',
+    ];
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'is_public' => 'boolean',
+        ];
+    }
+
+    /** @return BelongsTo<User, $this> */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('profile-avatars')
+            ->singleFile();
+    }
+
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('icon')
+            ->nonQueued()
+            ->fit(Fit::Crop, 60, 60)
+            ->sharpen(10);
+    }
+}

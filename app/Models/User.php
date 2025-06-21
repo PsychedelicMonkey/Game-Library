@@ -3,7 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
@@ -11,6 +13,16 @@ use Laravel\Sanctum\HasApiTokens;
 
 use function Illuminate\Events\queueable;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property ?CarbonInterface $email_verified_at
+ * @property string $password
+ * @property ?string $remember_token
+ * @property CarbonInterface $created_at
+ * @property CarbonInterface $updated_at
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -50,9 +62,19 @@ class User extends Authenticatable
         ];
     }
 
+    /** @return HasOne<Profile, $this> */
+    public function profile(): HasOne
+    {
+        return $this->hasOne(Profile::class);
+    }
+
     protected static function booted(): void
     {
         parent::booted();
+
+        static::created(function (User $user) {
+            $user->profile()->create(['username' => $user->name]);
+        });
 
         static::updated(queueable(function (User $customer) {
             if ($customer->hasStripeId()) {
