@@ -33,7 +33,7 @@ function Navbar() {
                                     </a>
                                 </li>
                                 <li>
-                                    <a>Settings</a>
+                                    <Link href={route('profile.edit')}>Settings</Link>
                                 </li>
                                 <li>
                                     <Link href={route('logout')} method="post" as="button">
