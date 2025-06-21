@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { Fieldset } from '@/components/ui/fieldset';
 import Input from '@/components/ui/input';
 import InputError from '@/components/ui/input-error';
 import { InputLabel } from '@/components/ui/input-label';
@@ -30,20 +31,26 @@ export default function AccountForm() {
 
     return (
         <form onSubmit={submit}>
-            <fieldset className="fieldset">
+            <Fieldset className="w-md rounded-box border border-base-300 bg-base-200 p-4">
                 <InputLabel htmlFor="name">Name</InputLabel>
-                <Input type="text" name="name" id="name" value={data.name} onChange={(e) => setData('name', e.target.value)} />
+                <Input type="text" name="name" id="name" className="w-full" value={data.name} onChange={(e) => setData('name', e.target.value)} />
                 <InputError message={errors.name} />
 
                 <InputLabel htmlFor="email">Email address</InputLabel>
-                <Input type="email" name="email" id="email" value={data.email} onChange={(e) => setData('email', e.target.value)} />
+                <Input
+                    type="email"
+                    name="email"
+                    id="email"
+                    className="w-full"
+                    value={data.email}
+                    onChange={(e) => setData('email', e.target.value)}
+                />
                 <InputError message={errors.email} />
-            </fieldset>
 
-            <Button type="submit" color="primary" disabled={processing}>
-                {processing && <Loading size="sm" />}
-                Save
-            </Button>
+                <Button type="submit" color="primary" disabled={processing} className="mt-4">
+                    {processing ? <Loading size="sm" type="bars" /> : 'Save'}
+                </Button>
+            </Fieldset>
         </form>
     );
 }

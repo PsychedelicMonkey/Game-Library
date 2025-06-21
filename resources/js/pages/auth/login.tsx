@@ -1,5 +1,6 @@
 import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
+import { Fieldset } from '@/components/ui/fieldset';
 import Input from '@/components/ui/input';
 import InputError from '@/components/ui/input-error';
 import { InputLabel } from '@/components/ui/input-label';
@@ -41,15 +42,16 @@ export default function Login({ canResetPassword, status }: LoginProps) {
             <div className="mx-auto max-w-7xl p-4 lg:p-6">
                 {status && <Alert message={status} color="success" icon />}
 
-                <h1 className="text-3xl font-semibold">Login</h1>
+                <h1 className="my-4 text-3xl font-semibold">Login</h1>
 
                 <form onSubmit={submit}>
-                    <fieldset className="fieldset">
+                    <Fieldset className="w-md rounded-box border border-base-300 bg-base-200 p-4">
                         <InputLabel htmlFor="email">Email address</InputLabel>
                         <Input
                             type="email"
                             name="email"
                             id="email"
+                            className="w-full"
                             required
                             autoFocus
                             tabIndex={1}
@@ -66,6 +68,7 @@ export default function Login({ canResetPassword, status }: LoginProps) {
                             type="password"
                             name="password"
                             id="password"
+                            className="w-full"
                             required
                             tabIndex={2}
                             autoComplete="current-password"
@@ -75,6 +78,12 @@ export default function Login({ canResetPassword, status }: LoginProps) {
                             placeholder="Password"
                         />
                         <InputError message={errors.password} />
+
+                        {canResetPassword && (
+                            <Link href={route('password.request')} className="link link-hover">
+                                Forgot your password?
+                            </Link>
+                        )}
 
                         <InputLabel>
                             <input
@@ -90,17 +99,10 @@ export default function Login({ canResetPassword, status }: LoginProps) {
                             Remember me
                         </InputLabel>
 
-                        {canResetPassword && (
-                            <Link href={route('password.request')} className="link link-hover">
-                                Forgot your password?
-                            </Link>
-                        )}
-                    </fieldset>
-
-                    <Button type="submit" disabled={processing} color="primary">
-                        {processing && <Loading size="sm" />}
-                        Login
-                    </Button>
+                        <Button type="submit" disabled={processing} color="neutral" className="mt-2">
+                            {processing ? <Loading size="sm" type="bars" /> : 'Login'}
+                        </Button>
+                    </Fieldset>
                 </form>
             </div>
         </AppLayout>

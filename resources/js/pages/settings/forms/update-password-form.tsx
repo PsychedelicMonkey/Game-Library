@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { Fieldset } from '@/components/ui/fieldset';
 import Input from '@/components/ui/input';
 import InputError from '@/components/ui/input-error';
 import { InputLabel } from '@/components/ui/input-label';
@@ -38,12 +39,13 @@ export default function UpdatePasswordForm() {
 
     return (
         <form onSubmit={submit}>
-            <fieldset className="fieldset">
+            <Fieldset className="w-md rounded-box border border-base-300 bg-base-200 p-4">
                 <InputLabel htmlFor="current_password">Current Password</InputLabel>
                 <Input
                     type="password"
                     name="current_password"
                     id="current_password"
+                    className="w-full"
                     ref={currentPasswordInput}
                     value={data.current_password}
                     onChange={(e) => setData('current_password', e.target.value)}
@@ -57,6 +59,7 @@ export default function UpdatePasswordForm() {
                     type="password"
                     name="password"
                     id="password"
+                    className="w-full"
                     ref={currentPasswordInput}
                     value={data.password}
                     onChange={(e) => setData('password', e.target.value)}
@@ -70,18 +73,18 @@ export default function UpdatePasswordForm() {
                     type="password"
                     name="password_confirmation"
                     id="password_confirmation"
+                    className="w-full"
                     value={data.password_confirmation}
                     onChange={(e) => setData('password_confirmation', e.target.value)}
                     autoComplete="new-password"
                     placeholder="Confirm password"
                 />
                 <InputError message={errors.password_confirmation} />
-            </fieldset>
 
-            <Button type="submit" color="primary" disabled={processing}>
-                {processing && <Loading size="sm" />}
-                Save
-            </Button>
+                <Button type="submit" color="primary" disabled={processing} className="mt-4">
+                    {processing ? <Loading size="sm" type="bars" /> : 'Save'}
+                </Button>
+            </Fieldset>
         </form>
     );
 }

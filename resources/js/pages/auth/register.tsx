@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { Fieldset } from '@/components/ui/fieldset';
 import Input from '@/components/ui/input';
 import InputError from '@/components/ui/input-error';
 import { InputLabel } from '@/components/ui/input-label';
@@ -35,15 +36,16 @@ export default function Register() {
             <Head title="Register" />
 
             <div className="mx-auto max-w-7xl p-4 lg:p-6">
-                <h1 className="text-3xl font-semibold">Register</h1>
+                <h1 className="mb-4 text-3xl font-semibold">Register</h1>
 
                 <form onSubmit={submit}>
-                    <fieldset className="fieldset">
+                    <Fieldset className="w-md rounded-box border border-base-300 bg-base-200 p-4">
                         <InputLabel htmlFor="name">Name</InputLabel>
                         <Input
                             type="text"
                             name="name"
                             id="name"
+                            className="w-full"
                             required
                             tabIndex={1}
                             autoComplete="name"
@@ -59,6 +61,7 @@ export default function Register() {
                             type="email"
                             name="email"
                             id="email"
+                            className="w-full"
                             required
                             tabIndex={2}
                             autoComplete="email"
@@ -74,6 +77,7 @@ export default function Register() {
                             type="password"
                             name="password"
                             id="password"
+                            className="w-full"
                             required
                             tabIndex={3}
                             autoComplete="new-password"
@@ -89,6 +93,7 @@ export default function Register() {
                             type="password"
                             name="password_confirmation"
                             id="password_confirmation"
+                            className="w-full"
                             required
                             tabIndex={4}
                             value={data.password_confirmation}
@@ -97,12 +102,11 @@ export default function Register() {
                             placeholder="Confirm password"
                         />
                         <InputError message={errors.password_confirmation} />
-                    </fieldset>
 
-                    <Button type="submit" disabled={processing} color="primary">
-                        {processing && <Loading size="sm" />}
-                        Register
-                    </Button>
+                        <Button type="submit" disabled={processing} color="neutral" className="mt-4">
+                            {processing ? <Loading size="sm" type="bars" /> : 'Register'}
+                        </Button>
+                    </Fieldset>
                 </form>
             </div>
         </AppLayout>

@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { Fieldset } from '@/components/ui/fieldset';
 import Input from '@/components/ui/input';
 import InputError from '@/components/ui/input-error';
 import { InputLabel } from '@/components/ui/input-label';
@@ -34,13 +35,20 @@ export default function ProfileForm() {
 
     return (
         <form onSubmit={submit}>
-            <fieldset className="fieldset">
+            <Fieldset className="w-md rounded-box border border-base-300 bg-base-200 p-4">
                 <InputLabel htmlFor="username">Username</InputLabel>
-                <Input type="text" name="username" id="username" value={data.username} onChange={(e) => setData('username', e.target.value)} />
+                <Input
+                    type="text"
+                    name="username"
+                    id="username"
+                    className="w-full"
+                    value={data.username}
+                    onChange={(e) => setData('username', e.target.value)}
+                />
                 <InputError message={errors.username} />
 
                 <InputLabel htmlFor="bio">Bio</InputLabel>
-                <Textarea name="bio" id="bio" value={data.bio} onChange={(e) => setData('bio', e.target.value)} />
+                <Textarea name="bio" id="bio" className="w-full" value={data.bio} onChange={(e) => setData('bio', e.target.value)} />
                 <InputError message={errors.bio} />
 
                 <InputLabel htmlFor="is_public">Visible to public</InputLabel>
@@ -52,12 +60,11 @@ export default function ProfileForm() {
                     color="success"
                 />
                 <InputError message={errors.is_public} />
-            </fieldset>
 
-            <Button type="submit" color="primary" disabled={processing}>
-                {processing && <Loading size="sm" />}
-                Save
-            </Button>
+                <Button type="submit" color="primary" disabled={processing} className="mt-4">
+                    {processing ? <Loading size="sm" type="bars" /> : 'Save'}
+                </Button>
+            </Fieldset>
         </form>
     );
 }

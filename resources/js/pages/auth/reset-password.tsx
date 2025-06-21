@@ -1,7 +1,9 @@
 import { Button } from '@/components/ui/button';
+import { Fieldset } from '@/components/ui/fieldset';
 import Input from '@/components/ui/input';
 import InputError from '@/components/ui/input-error';
 import { InputLabel } from '@/components/ui/input-label';
+import { Loading } from '@/components/ui/loading';
 import { AppLayout } from '@/layouts/app-layout';
 import { Head, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
@@ -39,12 +41,21 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
             <Head title="Reset password" />
 
             <div className="mx-auto max-w-7xl p-4 lg:p-6">
-                <h1 className="text-3xl font-semibold">Reset your password</h1>
+                <h1 className="mb-4 text-3xl font-semibold">Reset your password</h1>
 
                 <form onSubmit={submit}>
-                    <fieldset className="fieldset">
+                    <Fieldset className="w-md rounded-box border border-base-300 bg-base-200 p-4">
                         <InputLabel htmlFor="email">Email Address</InputLabel>
-                        <Input type="email" name="email" id="email" value={data.email} onChange={(e) => setData('email', e.target.value)} readOnly />
+                        <Input
+                            type="email"
+                            name="email"
+                            id="email"
+                            className="w-full"
+                            value={data.email}
+                            onChange={(e) => setData('email', e.target.value)}
+                            disabled={processing}
+                            readOnly
+                        />
                         <InputError message={errors.email} />
 
                         <InputLabel htmlFor="password">Password</InputLabel>
@@ -52,8 +63,10 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                             type="password"
                             name="password"
                             id="password"
+                            className="w-full"
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
+                            disabled={processing}
                             autoFocus
                             placeholder="Password"
                         />
@@ -64,16 +77,18 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                             type="password"
                             name="password_confirmation"
                             id="password_confirmation"
+                            className="w-full"
                             value={data.password_confirmation}
                             onChange={(e) => setData('password_confirmation', e.target.value)}
+                            disabled={processing}
                             placeholder="Confirm password"
                         />
                         <InputError message={errors.password_confirmation} />
-                    </fieldset>
 
-                    <Button type="submit" color="primary" disabled={processing}>
-                        Reset password
-                    </Button>
+                        <Button type="submit" color="neutral" disabled={processing} className="mt-4">
+                            {processing ? <Loading size="sm" type="bars" /> : 'Reset password'}
+                        </Button>
+                    </Fieldset>
                 </form>
             </div>
         </AppLayout>
