@@ -49,6 +49,7 @@ export default function UpdatePasswordForm() {
                     ref={currentPasswordInput}
                     value={data.current_password}
                     onChange={(e) => setData('current_password', e.target.value)}
+                    disabled={processing}
                     autoComplete="current-password"
                     placeholder="Current password"
                 />
@@ -63,6 +64,7 @@ export default function UpdatePasswordForm() {
                     ref={currentPasswordInput}
                     value={data.password}
                     onChange={(e) => setData('password', e.target.value)}
+                    disabled={processing}
                     autoComplete="new-password"
                     placeholder="New Password"
                 />
@@ -76,6 +78,7 @@ export default function UpdatePasswordForm() {
                     className="w-full"
                     value={data.password_confirmation}
                     onChange={(e) => setData('password_confirmation', e.target.value)}
+                    disabled={processing}
                     autoComplete="new-password"
                     placeholder="Confirm password"
                 />

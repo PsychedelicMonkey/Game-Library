@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Fieldset } from '@/components/ui/fieldset';
+import { Fieldset, FieldsetLegend } from '@/components/ui/fieldset';
 import Input from '@/components/ui/input';
 import InputError from '@/components/ui/input-error';
 import { InputLabel } from '@/components/ui/input-label';
@@ -35,7 +35,9 @@ export default function ProfileForm() {
 
     return (
         <form onSubmit={submit}>
-            <Fieldset className="w-md rounded-box border border-base-300 bg-base-200 p-4">
+            <Fieldset className="rounded-box border border-base-300 bg-base-200 p-4">
+                <FieldsetLegend>Profile Information</FieldsetLegend>
+
                 <InputLabel htmlFor="username">Username</InputLabel>
                 <Input
                     type="text"
@@ -44,11 +46,19 @@ export default function ProfileForm() {
                     className="w-full"
                     value={data.username}
                     onChange={(e) => setData('username', e.target.value)}
+                    disabled={processing}
                 />
                 <InputError message={errors.username} />
 
                 <InputLabel htmlFor="bio">Bio</InputLabel>
-                <Textarea name="bio" id="bio" className="w-full" value={data.bio} onChange={(e) => setData('bio', e.target.value)} />
+                <Textarea
+                    name="bio"
+                    id="bio"
+                    className="w-full"
+                    value={data.bio}
+                    onChange={(e) => setData('bio', e.target.value)}
+                    disabled={processing}
+                />
                 <InputError message={errors.bio} />
 
                 <InputLabel htmlFor="is_public">Visible to public</InputLabel>
@@ -58,6 +68,7 @@ export default function ProfileForm() {
                     defaultChecked={data.is_public}
                     onClick={() => setData('is_public', !data.is_public)}
                     color="success"
+                    disabled={processing}
                 />
                 <InputError message={errors.is_public} />
 

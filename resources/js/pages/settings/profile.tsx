@@ -2,6 +2,7 @@ import { AppLayout } from '@/layouts/app-layout';
 import AccountForm from '@/pages/settings/forms/account-form';
 import ProfileForm from '@/pages/settings/forms/profile-form';
 import UpdatePasswordForm from '@/pages/settings/forms/update-password-form';
+import UploadAvatarForm from '@/pages/settings/forms/upload-avatar-form';
 import { Head } from '@inertiajs/react';
 
 export default function Profile() {
@@ -25,7 +26,10 @@ export default function Profile() {
                     <div className="mx-auto max-w-7xl p-4 lg:p-6">
                         <h1 className="mb-4 text-3xl font-semibold">Profile Settings</h1>
 
-                        <ProfileForm />
+                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                            <ProfileForm />
+                            <UploadAvatarForm />
+                        </div>
                     </div>
                 </div>
 

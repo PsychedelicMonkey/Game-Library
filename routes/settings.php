@@ -3,6 +3,7 @@
 use App\Http\Controllers\Settings\AccountController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
+use App\Http\Controllers\Settings\UploadAvatarController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -15,4 +16,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('settings/profile', [AccountController::class, 'edit'])->name('profile.edit');
     Route::patch('settings/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::post('settings/upload-avatar', UploadAvatarController::class)->name('upload-avatar');
 });
