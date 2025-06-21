@@ -1,6 +1,7 @@
 import { AppLayout } from '@/layouts/app-layout';
 import AccountForm from '@/pages/settings/account-form';
 import ProfileForm from '@/pages/settings/profile-form';
+import UpdatePasswordForm from '@/pages/settings/update-password-form';
 import { Head } from '@inertiajs/react';
 
 export default function Profile() {
@@ -33,7 +34,7 @@ export default function Profile() {
                     <div className="mx-auto max-w-7xl p-4 lg:p-6">
                         <h1 className="text-3xl font-semibold">Change Password</h1>
 
-                        {/*    Content*/}
+                        <UpdatePasswordForm />
                     </div>
                 </div>
 
