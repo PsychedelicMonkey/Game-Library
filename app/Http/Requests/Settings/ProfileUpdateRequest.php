@@ -17,7 +17,7 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         /** @var User $user */
-        $user = $this->user()->load('profile');
+        $user = $this->user()?->load('profile');
 
         return [
             'username' => ['required', 'string', 'max:255', Rule::unique(Profile::class)->ignore($user->profile->id)],

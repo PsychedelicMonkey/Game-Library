@@ -15,8 +15,7 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         /** @var User $user */
-        $user = $request->user()
-            ->load('profile');
+        $user = $request->user()?->load('profile');
 
         $profile = $user->profile;
 
