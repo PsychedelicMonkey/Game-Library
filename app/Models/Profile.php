@@ -57,6 +57,22 @@ class Profile extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Return the profile's avatar object.
+     */
+    public function getAvatar(): ?Media
+    {
+        return $this->getFirstMedia('profile-avatars');
+    }
+
+    /**
+     * Return the profile's avatar URL.
+     */
+    public function getAvatarUrl(string $conversionName = ''): ?string
+    {
+        return $this->getFirstMediaUrl('profile-avatars', $conversionName);
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('profile-avatars')

@@ -19,10 +19,8 @@ function Navbar() {
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn avatar btn-circle btn-ghost">
                                 <div className="w-10 rounded-full">
-                                    <img
-                                        alt="Tailwind CSS Navbar component"
-                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                                    />
+                                    {/*TODO: placeholder avatar*/}
+                                    <img alt="Tailwind CSS Navbar component" src={auth.user.avatar} />
                                 </div>
                             </div>
                             <ul tabIndex={0} className="dropdown-content menu z-1 mt-3 w-52 menu-sm rounded-box bg-base-100 p-2 shadow">
