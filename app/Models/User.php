@@ -15,7 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 use function Illuminate\Events\queueable;
 
 /**
- * @property int $id
+ * @property string $id
  * @property string $name
  * @property string $email
  * @property ?CarbonInterface $email_verified_at

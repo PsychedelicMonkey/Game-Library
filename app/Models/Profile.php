@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +12,15 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
+/**
+ * @property string $id
+ * @property string $user_id
+ * @property string $username
+ * @property ?string $bio
+ * @property bool $is_public
+ * @property CarbonInterface $created_at
+ * @property CarbonInterface $updated_at
+ */
 class Profile extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\ProfileFactory> */

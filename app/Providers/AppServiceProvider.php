@@ -6,6 +6,7 @@ use App\Models\Subscription;
 use App\Models\SubscriptionItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Rules\Password;
 use Laravel\Cashier\Cashier;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,5 +33,14 @@ class AppServiceProvider extends ServiceProvider
         // Cashier settings.
         Cashier::useSubscriptionModel(Subscription::class);
         Cashier::useSubscriptionItemModel(SubscriptionItem::class);
+
+        // Default password rules.
+        Password::defaults(function () {
+            $rule = Password::min(8);
+
+            return $this->app->isProduction()
+                ? $rule->letters()->mixedCase()->numbers()->symbols()
+                : $rule;
+        });
     }
 }
