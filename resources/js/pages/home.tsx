@@ -2,9 +2,13 @@ import { ImageHero, LoginHero } from '@/components/hero';
 import { Alert } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Collapse, CollapseContent, CollapseTitle } from '@/components/ui/collapse';
 import FileInput from '@/components/ui/file-input';
 import { Loading } from '@/components/ui/loading';
 import Progress from '@/components/ui/progress';
+import { RatingInput, ReadOnlyRating } from '@/components/ui/rating';
+import { Stat, StatDesc, Stats, StatTitle, StatValue } from '@/components/ui/stat';
+import { Tooltip } from '@/components/ui/tooltip';
 import { AppLayout } from '@/layouts/app-layout';
 import { SharedData } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
@@ -17,6 +21,39 @@ export default function Home() {
             <Head title="Home Page" />
 
             {auth.user ? <ImageHero /> : <LoginHero />}
+
+            <div className="mx-auto max-w-7xl p-4 lg:p-6">
+                <Collapse
+                    tabIndex={0}
+                    modifier="arrow"
+                    className="border border-base-300 bg-primary text-primary-content focus:bg-secondary focus:text-secondary-content"
+                >
+                    <CollapseTitle className="font-semibol">How do I create an account?</CollapseTitle>
+                    <CollapseContent className="text-sm">
+                        Click the "Register" button in the top right corner and follow the registration process.
+                    </CollapseContent>
+                </Collapse>
+
+                <Stats className="shadow">
+                    <Stat>
+                        <StatTitle>Total Page Views</StatTitle>
+                        <StatValue>89,400</StatValue>
+                        <StatDesc>21% more than last month</StatDesc>
+                    </Stat>
+                </Stats>
+            </div>
+
+            <Tooltip data-tip="Hello">
+                <Button>Hover me</Button>
+            </Tooltip>
+
+            <div className="mx-auto flex max-w-7xl gap-4 p-4 lg:p-6">
+                <RatingInput name="user-rating" id="user-rating" />
+
+                <Tooltip data-tip="2 stars" placement="bottom">
+                    <ReadOnlyRating rating={2} />
+                </Tooltip>
+            </div>
 
             <div className="mx-auto min-h-screen max-w-7xl space-y-6 p-4 lg:p-6">
                 <div className="flex gap-2">
