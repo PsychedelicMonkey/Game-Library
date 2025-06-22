@@ -1,10 +1,16 @@
 <?php
 
+use App\Models\Profile;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('home');
+    return Inertia::render('home', [
+        'profiles' => Inertia::optional(fn () => Profile::query()
+            ->orderBy('created_at', 'desc')
+            ->limit(10)
+            ->get()),
+    ]);
 })->name('home');
 
 Route::get('/about', function () {

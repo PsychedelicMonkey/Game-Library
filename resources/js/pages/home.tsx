@@ -1,4 +1,5 @@
 import { ImageHero, LoginHero } from '@/components/hero';
+import { ProfileCard, ProfileSkeleton } from '@/components/profile-card';
 import { Alert } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -10,10 +11,10 @@ import { RatingInput, ReadOnlyRating } from '@/components/ui/rating';
 import { Stat, StatDesc, Stats, StatTitle, StatValue } from '@/components/ui/stat';
 import { Tooltip } from '@/components/ui/tooltip';
 import { AppLayout } from '@/layouts/app-layout';
-import { SharedData } from '@/types';
-import { Head, usePage } from '@inertiajs/react';
+import { Profile, SharedData } from '@/types';
+import { Head, usePage, WhenVisible } from '@inertiajs/react';
 
-export default function Home() {
+export default function Home({ profiles }: { profiles: Profile[] }) {
     const { auth } = usePage<SharedData>().props;
 
     return (
@@ -351,6 +352,25 @@ export default function Home() {
                     <FileInput color="success" />
                     <FileInput size="xl" />
                 </div>
+            </div>
+
+            {/* Profile cards */}
+            <div>
+                <WhenVisible
+                    data={['profiles']}
+                    fallback={
+                        <div className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
+                            {[...Array(8)].map((value, index) => (
+                                <ProfileSkeleton key={index} />
+                            ))}
+                        </div>
+                    }
+                >
+                    <div className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-4 lg:p-6">
+                        {' '}
+                        {profiles?.map((profile) => <ProfileCard profile={profile} key={profile.id} />)}
+                    </div>
+                </WhenVisible>
             </div>
         </AppLayout>
     );

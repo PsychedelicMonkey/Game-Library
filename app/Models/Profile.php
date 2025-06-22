@@ -42,6 +42,11 @@ class Profile extends Model implements HasMedia
     ];
 
     /**
+     * @var list<string>
+     */
+    protected $hidden = ['user_id'];
+
+    /**
      * @return array<string, string>
      */
     protected function casts(): array
