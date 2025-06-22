@@ -1,9 +1,11 @@
 import ThemeController from '@/components/ui/theme-controller';
+import useInitials from '@/hooks/use-initials';
 import { SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 
 function Navbar() {
     const { auth, name } = usePage<SharedData>().props;
+    const getInitials = useInitials();
 
     return (
         <div className="fixed z-40 navbar bg-base-100 shadow-sm">
@@ -20,12 +22,19 @@ function Navbar() {
                 {auth.user ? (
                     <>
                         <div className="dropdown dropdown-end">
-                            <div tabIndex={0} role="button" className="btn avatar btn-circle btn-ghost">
-                                <div className="w-10 rounded-full">
-                                    {/*TODO: placeholder avatar*/}
-                                    <img alt="Tailwind CSS Navbar component" src={auth.user.avatar} />
+                            {auth.user.avatar ? (
+                                <div tabIndex={0} role="button" className="btn avatar btn-circle btn-ghost">
+                                    <div className="w-10 rounded-full">
+                                        <img alt="" src={auth.user.avatar} />
+                                    </div>
                                 </div>
-                            </div>
+                            ) : (
+                                <div tabIndex={0} role="button" className="btn avatar avatar-placeholder btn-circle btn-ghost">
+                                    <div className="w-10 rounded-full bg-neutral text-neutral-content">
+                                        <span className="text-xs">{getInitials(auth.user.profile.username)}</span>
+                                    </div>
+                                </div>
+                            )}
                             <ul tabIndex={0} className="dropdown-content menu z-1 mt-3 w-52 menu-sm rounded-box bg-base-100 p-2 shadow">
                                 <li>
                                     <a className="justify-between">
