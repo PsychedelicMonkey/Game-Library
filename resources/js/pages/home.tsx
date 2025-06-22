@@ -1,4 +1,4 @@
-import { ImageHero, LoginHero } from '@/components/hero';
+import { GameCard } from '@/components/game-card';
 import { ProfileCard, ProfileSkeleton } from '@/components/profile-card';
 import { Alert } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
@@ -11,17 +11,25 @@ import { RatingInput, ReadOnlyRating } from '@/components/ui/rating';
 import { Stat, StatDesc, Stats, StatTitle, StatValue } from '@/components/ui/stat';
 import { Tooltip } from '@/components/ui/tooltip';
 import { AppLayout } from '@/layouts/app-layout';
-import { Profile, SharedData } from '@/types';
-import { Head, usePage, WhenVisible } from '@inertiajs/react';
+import { Profile } from '@/types';
+import { Game } from '@/types/library';
+import { Head, WhenVisible } from '@inertiajs/react';
 
-export default function Home({ profiles }: { profiles: Profile[] }) {
-    const { auth } = usePage<SharedData>().props;
-
+export default function Home({ games, profiles }: { games: Game[]; profiles?: Profile[] }) {
     return (
         <AppLayout>
             <Head title="Home Page" />
 
-            {auth.user ? <ImageHero /> : <LoginHero />}
+            {/*{!auth.user ? <ImageHero /> : <LoginHero />}*/}
+
+            <div className="mx-auto max-w-7xl p-4 lg:pt-12">
+                <div className="divider">Recently released</div>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
+                    {games.map((game) => (
+                        <GameCard key={game.id} game={game} />
+                    ))}
+                </div>
+            </div>
 
             <div className="mx-auto max-w-7xl p-4 lg:p-6">
                 <Collapse

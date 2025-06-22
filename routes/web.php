@@ -1,11 +1,18 @@
 <?php
 
+use App\Models\Game;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('home', [
+        'games' => Game::query()
+            ->with(['developers', 'publishers', 'genres', 'platforms'])
+            ->orderByDesc('release_date')
+            ->limit(10)
+            ->get(),
+
         'profiles' => Inertia::optional(fn () => Profile::query()
             ->orderBy('created_at', 'desc')
             ->limit(10)
