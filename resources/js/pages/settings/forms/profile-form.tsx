@@ -1,3 +1,4 @@
+import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Fieldset, FieldsetLegend } from '@/components/ui/fieldset';
 import Input from '@/components/ui/input';
@@ -7,10 +8,9 @@ import Toggle from '@/components/ui/input-toggle';
 import { Loading } from '@/components/ui/loading';
 import Textarea from '@/components/ui/textarea';
 import { SharedData } from '@/types';
+import { Transition } from '@headlessui/react';
 import { useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
-import { Alert } from '@/components/ui/alert';
-import { Transition } from '@headlessui/react';
 
 type ProfileForm = {
     username: string;
@@ -45,7 +45,8 @@ export default function ProfileForm() {
                     enter="transition ease-in-out"
                     enterFrom="opacity-0"
                     leave="transition ease-in-out"
-                    leaveTo="opacity-0">
+                    leaveTo="opacity-0"
+                >
                     <Alert message="Saved" color="success" icon />
                 </Transition>
 

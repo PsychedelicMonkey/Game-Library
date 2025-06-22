@@ -1,3 +1,4 @@
+import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Fieldset } from '@/components/ui/fieldset';
 import Input from '@/components/ui/input';
@@ -5,10 +6,9 @@ import InputError from '@/components/ui/input-error';
 import { InputLabel } from '@/components/ui/input-label';
 import { Loading } from '@/components/ui/loading';
 import { SharedData } from '@/types';
+import { Transition } from '@headlessui/react';
 import { useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
-import { Transition } from '@headlessui/react';
-import { Alert } from '@/components/ui/alert';
 
 type ProfileForm = {
     name: string;
@@ -33,13 +33,14 @@ export default function AccountForm() {
 
     return (
         <form onSubmit={submit}>
-            <Fieldset className="w-md rounded-box border border-base-300 bg-base-200 p-4">
+            <Fieldset className="rounded-box border border-base-300 bg-base-200 p-4 md:w-md">
                 <Transition
                     show={recentlySuccessful}
                     enter="transition ease-in-out"
                     enterFrom="opacity-0"
                     leave="transition ease-in-out"
-                    leaveTo="opacity-0">
+                    leaveTo="opacity-0"
+                >
                     <Alert message="Saved" color="success" icon />
                 </Transition>
 

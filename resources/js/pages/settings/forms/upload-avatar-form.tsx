@@ -1,3 +1,4 @@
+import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Fieldset, FieldsetLegend } from '@/components/ui/fieldset';
 import FileInput from '@/components/ui/file-input';
@@ -6,10 +7,9 @@ import { InputLabel } from '@/components/ui/input-label';
 import { Loading } from '@/components/ui/loading';
 import Progress from '@/components/ui/progress';
 import Textarea from '@/components/ui/textarea';
+import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
-import { Alert } from '@/components/ui/alert';
-import { Transition } from '@headlessui/react';
 
 type UploadForm = {
     file: File | null;
