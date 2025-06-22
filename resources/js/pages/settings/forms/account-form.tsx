@@ -7,6 +7,8 @@ import { Loading } from '@/components/ui/loading';
 import { SharedData } from '@/types';
 import { useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { Transition } from '@headlessui/react';
+import { Alert } from '@/components/ui/alert';
 
 type ProfileForm = {
     name: string;
@@ -16,7 +18,7 @@ type ProfileForm = {
 export default function AccountForm() {
     const { auth } = usePage<SharedData>().props;
 
-    const { data, setData, errors, patch, processing } = useForm<Required<ProfileForm>>({
+    const { data, setData, errors, patch, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
         name: auth.user.name,
         email: auth.user.email,
     });
@@ -32,6 +34,15 @@ export default function AccountForm() {
     return (
         <form onSubmit={submit}>
             <Fieldset className="w-md rounded-box border border-base-300 bg-base-200 p-4">
+                <Transition
+                    show={recentlySuccessful}
+                    enter="transition ease-in-out"
+                    enterFrom="opacity-0"
+                    leave="transition ease-in-out"
+                    leaveTo="opacity-0">
+                    <Alert message="Saved" color="success" icon />
+                </Transition>
+
                 <InputLabel htmlFor="name">Name</InputLabel>
                 <Input
                     type="text"

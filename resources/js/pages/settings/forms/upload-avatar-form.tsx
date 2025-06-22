@@ -8,6 +8,8 @@ import Progress from '@/components/ui/progress';
 import Textarea from '@/components/ui/textarea';
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { Alert } from '@/components/ui/alert';
+import { Transition } from '@headlessui/react';
 
 type UploadForm = {
     file: File | null;
@@ -15,7 +17,7 @@ type UploadForm = {
 };
 
 export default function UploadAvatarForm() {
-    const { data, setData, errors, post, processing, progress } = useForm<Required<UploadForm>>({
+    const { data, setData, errors, post, processing, progress, recentlySuccessful } = useForm<Required<UploadForm>>({
         file: null,
         caption: '',
     });
@@ -32,6 +34,16 @@ export default function UploadAvatarForm() {
         <form onSubmit={submit}>
             <Fieldset className="rounded-box border border-base-300 bg-base-200 p-4">
                 <FieldsetLegend>Avatar</FieldsetLegend>
+
+                <Transition
+                    show={recentlySuccessful}
+                    enter="transition ease-in-out"
+                    enterFrom="opacity-0"
+                    leave="transition ease-in-out"
+                    leaveTo="opacity-0"
+                >
+                    <Alert message="Avatar uploaded" color="success" icon />
+                </Transition>
 
                 <InputLabel htmlFor="avatar">File</InputLabel>
                 <FileInput

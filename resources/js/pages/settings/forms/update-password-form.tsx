@@ -6,12 +6,14 @@ import { InputLabel } from '@/components/ui/input-label';
 import { Loading } from '@/components/ui/loading';
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler, useRef } from 'react';
+import { Alert } from '@/components/ui/alert';
+import { Transition } from '@headlessui/react';
 
 export default function UpdatePasswordForm() {
     const passwordInput = useRef<HTMLInputElement>(null);
     const currentPasswordInput = useRef<HTMLInputElement>(null);
 
-    const { data, setData, errors, put, processing, reset } = useForm({
+    const { data, setData, errors, put, processing, reset, recentlySuccessful } = useForm({
         current_password: '',
         password: '',
         password_confirmation: '',
@@ -40,6 +42,16 @@ export default function UpdatePasswordForm() {
     return (
         <form onSubmit={submit}>
             <Fieldset className="w-md rounded-box border border-base-300 bg-base-200 p-4">
+                <Transition
+                    show={recentlySuccessful}
+                    enter="transition ease-in-out"
+                    enterFrom="opacity-0"
+                    leave="transition ease-in-out"
+                    leaveTo="opacity-0"
+                >
+                    <Alert message="Password updated" color="success" icon />
+                </Transition>
+
                 <InputLabel htmlFor="current_password">Current Password</InputLabel>
                 <Input
                     type="password"

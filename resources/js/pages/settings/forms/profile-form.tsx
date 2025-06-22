@@ -9,6 +9,8 @@ import Textarea from '@/components/ui/textarea';
 import { SharedData } from '@/types';
 import { useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { Alert } from '@/components/ui/alert';
+import { Transition } from '@headlessui/react';
 
 type ProfileForm = {
     username: string;
@@ -19,7 +21,7 @@ type ProfileForm = {
 export default function ProfileForm() {
     const { auth } = usePage<SharedData>().props;
 
-    const { data, setData, errors, patch, processing } = useForm<Required<ProfileForm>>({
+    const { data, setData, errors, patch, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
         username: auth.user.profile.username,
         bio: auth.user.profile.bio,
         is_public: auth.user.profile.is_public,
@@ -37,6 +39,15 @@ export default function ProfileForm() {
         <form onSubmit={submit}>
             <Fieldset className="rounded-box border border-base-300 bg-base-200 p-4">
                 <FieldsetLegend>Profile Information</FieldsetLegend>
+
+                <Transition
+                    show={recentlySuccessful}
+                    enter="transition ease-in-out"
+                    enterFrom="opacity-0"
+                    leave="transition ease-in-out"
+                    leaveTo="opacity-0">
+                    <Alert message="Saved" color="success" icon />
+                </Transition>
 
                 <InputLabel htmlFor="username">Username</InputLabel>
                 <Input
