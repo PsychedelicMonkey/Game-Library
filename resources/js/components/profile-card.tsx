@@ -3,6 +3,7 @@ import { Card, CardBody, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import useInitials from '@/hooks/use-initials';
 import { Profile } from '@/types';
+import { Tooltip } from '@/components/ui/tooltip';
 
 function ProfileCard({ profile }: { profile: Profile }) {
     const getInitials = useInitials();
@@ -10,7 +11,9 @@ function ProfileCard({ profile }: { profile: Profile }) {
     return (
         <Card className="bg-base-100">
             <div className="m-4">
-                <AvatarPlaceholder initials={getInitials(profile.username)} />
+                <Tooltip data-tip={profile.username} placement="bottom">
+                    <AvatarPlaceholder initials={getInitials(profile.username)} />
+                </Tooltip>
             </div>
 
             <CardBody>
