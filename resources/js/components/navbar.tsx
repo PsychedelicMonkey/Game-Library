@@ -1,3 +1,4 @@
+import ThemeController from '@/components/ui/theme-controller';
 import { SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 
@@ -13,6 +14,8 @@ function Navbar() {
             </div>
             <div className="flex gap-2">
                 <input type="text" placeholder="Search" className="input-bordered input w-24 md:w-auto" />
+
+                <ThemeController />
 
                 {auth.user ? (
                     <>

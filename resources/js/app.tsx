@@ -1,5 +1,6 @@
 import '../css/app.css';
 
+import { initializeTheme } from '@/hooks/use-appearance';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
@@ -14,4 +15,9 @@ createInertiaApp({
 
         root.render(<App {...props} />);
     },
+    progress: {
+        color: '#4B5563',
+    },
 });
+
+initializeTheme();

@@ -1,6 +1,13 @@
 @import 'tailwindcss';
 
-@plugin 'daisyui';
+@plugin 'daisyui' {
+    themes:
+        light --default,
+        dark --prefersdark,
+        retro,
+        synthwave,
+        cyberpunk;
+}
 
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
