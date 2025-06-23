@@ -45,7 +45,7 @@ export default function Login({ canResetPassword, status }: LoginProps) {
                 <h1 className="my-4 text-3xl font-semibold">Login</h1>
 
                 <form onSubmit={submit}>
-                    <Fieldset className="w-md rounded-box border border-base-300 bg-base-200 p-4">
+                    <Fieldset className="rounded-box border border-base-300 bg-base-200 p-4 lg:w-md">
                         <InputLabel htmlFor="email">Email address</InputLabel>
                         <Input
                             type="email"
@@ -104,6 +104,15 @@ export default function Login({ canResetPassword, status }: LoginProps) {
                         </Button>
                     </Fieldset>
                 </form>
+
+                <div className="mt-6">
+                    <p className="text-sm">
+                        Don't have an account yet?{' '}
+                        <Link href={route('register')} className="underline hover:text-accent">
+                            Sign up now
+                        </Link>
+                    </p>
+                </div>
             </div>
         </AppLayout>
     );
