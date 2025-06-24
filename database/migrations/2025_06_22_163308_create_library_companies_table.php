@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('library_companies', function (Blueprint $table) {
             $table->ulid('id')->primary()->unique();
-            $table->foreignUlid('parent_id')->nullable()->constrained('library_companies')->cascadeOnDelete();
+            $table->ulid('parent_id')->nullable();
             $table->string('name');
             $table->string('slug')->unique();
             $table->longText('description')->nullable();
@@ -24,6 +24,10 @@ return new class extends Migration
             $table->date('date_formed')->nullable();
             $table->date('date_defunct')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('library_companies', function (Blueprint $table) {
+            $table->foreign('parent_id')->references('id')->on('library_companies')->cascadeOnDelete();
         });
     }
 
