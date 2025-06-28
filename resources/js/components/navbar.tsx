@@ -1,6 +1,7 @@
+import { DrawerButton } from '@/components/ui/drawer';
 import ThemeController from '@/components/ui/theme-controller';
 import useInitials from '@/hooks/use-initials';
-import { SharedData } from '@/types';
+import type { SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 
 function Navbar() {
@@ -8,16 +9,24 @@ function Navbar() {
     const getInitials = useInitials();
 
     return (
-        <div className="fixed z-40 navbar bg-base-100 shadow-sm">
+        <div className="fixed z-30 navbar bg-base-100 shadow-sm">
+            {/* Drawer button */}
+            <div className="flex-none lg:hidden">
+                <DrawerButton />
+            </div>
+
             <div className="flex-1">
                 <Link href={route('home')} className="btn text-xl btn-ghost">
                     {name}
                 </Link>
             </div>
+
             <div className="flex gap-2">
                 <input type="text" placeholder="Search" className="input-bordered input w-24 md:w-auto" />
 
-                <ThemeController />
+                <div className="hidden lg:block">
+                    <ThemeController />
+                </div>
 
                 {auth.user ? (
                     <>
@@ -54,14 +63,15 @@ function Navbar() {
                         </div>
                     </>
                 ) : (
-                    <>
+                    <div className="hidden gap-2 lg:flex">
                         <Link href={route('login')} className="btn">
                             Login
                         </Link>
+
                         <Link href={route('register')} className="btn btn-primary">
                             Register
                         </Link>
-                    </>
+                    </div>
                 )}
             </div>
         </div>

@@ -1,16 +1,14 @@
 import { Footer } from '@/components/footer';
-import { Navbar } from '@/components/navbar';
-import { PropsWithChildren } from 'react';
+import { Drawer } from '@/components/ui/drawer';
+import type { PropsWithChildren } from 'react';
 
 function AppLayout({ children }: PropsWithChildren) {
     return (
-        <>
-            <Navbar />
-
+        <Drawer>
             <main className="min-h-screen pt-14">{children}</main>
 
             <Footer />
-        </>
+        </Drawer>
     );
 }
 
