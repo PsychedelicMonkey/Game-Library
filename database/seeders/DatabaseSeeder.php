@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\Game;
 use App\Models\Genre;
 use App\Models\Platform;
+use App\Models\Tag;
 use Closure;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Eloquent\Collection;
@@ -21,6 +22,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         DB::raw('SET time_zone=\'+00:00\'');
+
+        // Tags
+        $this->command->warn(PHP_EOL.'Creating tags');
+        $tags = $this->withProgressBar(100, fn () => Tag::factory(1)
+            ->create());
+        $this->command->info('Tags created.');
 
         $this->command->warn(PHP_EOL.'Creating library companies...');
         $companies = $this->withProgressBar(100, fn () => Company::factory(1)
@@ -47,6 +54,7 @@ class DatabaseSeeder extends Seeder
             ->hasAttached($companies->random(rand(1, 3)), relationship: 'publishers')
             ->hasAttached($genres->random(rand(1, 3)), relationship: 'genres')
             ->hasAttached($platforms->random(rand(1, 3)), relationship: 'platforms')
+            ->hasAttached($tags->random(rand(5, 10)))
             ->create());
         $this->command->info('Library games created.');
     }
