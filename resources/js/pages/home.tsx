@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Collapse, CollapseContent, CollapseTitle } from '@/components/ui/collapse';
 import FileInput from '@/components/ui/file-input';
 import { Loading } from '@/components/ui/loading';
+import { Modal } from '@/components/ui/modal';
 import Progress from '@/components/ui/progress';
 import { RatingInput, ReadOnlyRating } from '@/components/ui/rating';
 import { Stat, StatDesc, Stats, StatTitle, StatValue } from '@/components/ui/stat';
@@ -14,6 +15,7 @@ import { AppLayout } from '@/layouts/app-layout';
 import { Profile } from '@/types';
 import { Game } from '@/types/library';
 import { Head, WhenVisible } from '@inertiajs/react';
+import RadialProgress from '@/components/ui/radial-progress';
 
 export default function Home({ games, profiles }: { games: Game[]; profiles?: Profile[] }) {
     return (
@@ -52,9 +54,18 @@ export default function Home({ games, profiles }: { games: Game[]; profiles?: Pr
                 </Stats>
             </div>
 
-            <Tooltip data-tip="Hello">
-                <Button>Hover me</Button>
-            </Tooltip>
+            <div className="mx-auto max-w-7xl p-4 lg:p-6">
+                <Tooltip data-tip="Hello">
+                    <Button>Hover me</Button>
+                </Tooltip>
+
+                {/* @ts-expect-error Open the modal when button is clicked */}
+                <Button onClick={() => document.getElementById('test-modal').showModal()}>Open modal</Button>
+                <Modal id="test-modal">
+                    <h1 className="text-lg font-bold">Hello!</h1>
+                    <p className="py-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, eaque!</p>
+                </Modal>
+            </div>
 
             <div className="mx-auto flex max-w-7xl gap-4 p-4 lg:p-6">
                 <RatingInput name="user-rating" id="user-rating" />
@@ -62,6 +73,8 @@ export default function Home({ games, profiles }: { games: Game[]; profiles?: Pr
                 <Tooltip data-tip="2 stars" placement="bottom">
                     <ReadOnlyRating rating={2} />
                 </Tooltip>
+
+                <RadialProgress value={70} color="warning" />
             </div>
 
             <div className="mx-auto min-h-screen max-w-7xl space-y-6 p-4 lg:p-6">
