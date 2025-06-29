@@ -8,6 +8,7 @@ import FileInput from '@/components/ui/file-input';
 import { Loading } from '@/components/ui/loading';
 import { Modal } from '@/components/ui/modal';
 import Progress from '@/components/ui/progress';
+import RadialProgress from '@/components/ui/radial-progress';
 import { RatingInput, ReadOnlyRating } from '@/components/ui/rating';
 import { Stat, StatDesc, Stats, StatTitle, StatValue } from '@/components/ui/stat';
 import { Tooltip } from '@/components/ui/tooltip';
@@ -15,7 +16,6 @@ import { AppLayout } from '@/layouts/app-layout';
 import { Profile } from '@/types';
 import { Game } from '@/types/library';
 import { Head, WhenVisible } from '@inertiajs/react';
-import RadialProgress from '@/components/ui/radial-progress';
 
 export default function Home({ games, profiles }: { games: Game[]; profiles?: Profile[] }) {
     return (

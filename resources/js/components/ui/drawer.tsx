@@ -1,7 +1,9 @@
 import { Navbar } from '@/components/navbar';
+import { Icon } from '@/components/ui/icon';
 import ThemeController from '@/components/ui/theme-controller';
 import type { SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
+import { MenuIcon } from 'lucide-react';
 import * as React from 'react';
 
 function Drawer({ children }: React.HTMLProps<HTMLDivElement>) {
@@ -24,9 +26,7 @@ function Drawer({ children }: React.HTMLProps<HTMLDivElement>) {
 function DrawerButton() {
     return (
         <label htmlFor="navbar-drawer" aria-label="open sidebar" className="btn btn-square btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block h-6 w-6 stroke-current">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
+            <Icon iconNode={MenuIcon} />
         </label>
     );
 }
