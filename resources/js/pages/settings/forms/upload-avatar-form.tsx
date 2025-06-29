@@ -1,4 +1,5 @@
 import { Alert } from '@/components/ui/alert';
+import { AvatarPlaceholder } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Fieldset, FieldsetLegend } from '@/components/ui/fieldset';
 import FileInput from '@/components/ui/file-input';
@@ -7,8 +8,9 @@ import { InputLabel } from '@/components/ui/input-label';
 import { Loading } from '@/components/ui/loading';
 import Progress from '@/components/ui/progress';
 import Textarea from '@/components/ui/textarea';
+import type { SharedData } from '@/types';
 import { Transition } from '@headlessui/react';
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
 type UploadForm = {
@@ -17,6 +19,8 @@ type UploadForm = {
 };
 
 export default function UploadAvatarForm() {
+    const { auth } = usePage<SharedData>().props;
+
     const { data, setData, errors, post, processing, progress, recentlySuccessful } = useForm<Required<UploadForm>>({
         file: null,
         caption: '',
@@ -34,6 +38,16 @@ export default function UploadAvatarForm() {
         <form onSubmit={submit}>
             <Fieldset className="rounded-box border border-base-300 bg-base-200 p-4">
                 <FieldsetLegend>Avatar</FieldsetLegend>
+
+                {auth.user.avatar ? (
+                    <div className="avatar">
+                        <div className="w-24 rounded-full">
+                            <img src={auth.user.profile.avatar} alt="" />
+                        </div>
+                    </div>
+                ) : (
+                    <AvatarPlaceholder username={auth.user.profile.username} />
+                )}
 
                 <Transition
                     show={recentlySuccessful}
