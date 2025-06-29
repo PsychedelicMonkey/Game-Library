@@ -7,14 +7,14 @@ import { Link } from '@inertiajs/react';
 function GameCard({ game }: { game: Game }) {
     return (
         <Card className="bg-base-100 shadow-sm group-hover:shadow-lg">
-            <Link href={route('home')}>
+            <Link href={route('game.show', game.slug)}>
                 <figure>
                     <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
                 </figure>
             </Link>
 
             <CardBody>
-                <Link href={route('home')} className="hover:underline">
+                <Link href={route('game.show', game.slug)} className="hover:underline">
                     <CardTitle>{game.title}</CardTitle>
                 </Link>
                 <div className="flex flex-col">

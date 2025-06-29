@@ -1,3 +1,5 @@
+import { Tag } from '@/types/index';
+
 export interface Company {
     id: string;
     name: string;
@@ -25,6 +27,7 @@ export interface Game {
     publishers: Company[];
     genres: Genre[];
     platforms: Platform[];
+    tags: Tag[];
     created_at: string;
     updated_at: string;
 }

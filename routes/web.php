@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Library\GameController;
 use App\Models\Game;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,8 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return Inertia::render('about');
 })->name('about');
+
+Route::get('/library/game/{game:slug}', [GameController::class, 'show'])->name('game.show');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

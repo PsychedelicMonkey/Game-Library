@@ -21,8 +21,18 @@ export interface SharedData {
     [key: string]: unknown;
 }
 
+export interface Tag {
+    id: string;
+    name: { en: string };
+    slug: { en: string };
+    type: string | null;
+    order_column: number;
+    created_at: string;
+    updated_at: string;
+}
+
 export interface User {
-    id: number;
+    id: string;
     name: string;
     email: string;
     email_verified_at: string | null;
