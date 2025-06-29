@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\CarbonInterface;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,6 +31,11 @@ class Profile extends Model implements HasMedia
      * @var string
      */
     protected $table = 'user_profiles';
+
+    /**
+     * @var list<string>
+     */
+    protected $appends = ['avatar'];
 
     /**
      * @var list<string>
@@ -62,6 +68,13 @@ class Profile extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
+    protected function avatar(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->getAvatarUrl('medium'),
+        );
+    }
+
     /**
      * Return the profile's avatar object.
      */
@@ -90,5 +103,8 @@ class Profile extends Model implements HasMedia
             ->nonQueued()
             ->fit(Fit::Crop, 60, 60)
             ->sharpen(10);
+
+        $this->addMediaConversion('medium')
+            ->fit(Fit::Crop, 200, 200);
     }
 }

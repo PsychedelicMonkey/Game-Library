@@ -6,6 +6,7 @@ export interface Auth {
 
 export interface Profile {
     id: string;
+    avatar: string;
     username: string;
     bio: string | null;
     is_public: boolean;

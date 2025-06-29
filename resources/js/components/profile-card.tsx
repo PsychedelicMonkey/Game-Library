@@ -2,14 +2,22 @@ import { AvatarPlaceholder } from '@/components/ui/avatar';
 import { Card, CardBody, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Tooltip } from '@/components/ui/tooltip';
-import { Profile } from '@/types';
+import type { Profile } from '@/types';
 
 function ProfileCard({ profile }: { profile: Profile }) {
     return (
         <Card className="bg-base-100">
             <div className="m-4">
                 <Tooltip data-tip={profile.username} placement="bottom">
-                    <AvatarPlaceholder username={profile.username} />
+                    {profile.avatar ? (
+                        <div className="avatar">
+                            <div className="w-24 rounded-full">
+                                <img src={profile.avatar} alt="" />
+                            </div>
+                        </div>
+                    ) : (
+                        <AvatarPlaceholder username={profile.username} />
+                    )}
                 </Tooltip>
             </div>
 
