@@ -54,7 +54,7 @@ class UserFactory extends Factory
         return $this->afterCreating(function (User $user) {
             $profile = Profile::factory()->make();
 
-            $user->profile()->update($profile->toArray());
+            $user->profile()->save($profile);
         });
     }
 }
