@@ -67,4 +67,12 @@ class Game extends Model implements HasMedia
     {
         return $this->belongsToMany(Company::class, 'library_game_publisher', 'library_game_id', 'library_publisher_id');
     }
+
+    /**
+     * Determine if the game is visible.
+     */
+    public function isVisible(): bool
+    {
+        return $this->is_visible;
+    }
 }

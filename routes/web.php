@@ -7,18 +7,22 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('home', [
-        'games' => Game::query()
-            ->with(['developers', 'publishers', 'genres', 'platforms'])
-            ->orderByDesc('release_date')
-            ->limit(10)
-            ->get(),
+    $games = Game::query()
+        ->where('is_visible', true)
+        ->with(['developers', 'publishers', 'genres', 'platforms'])
+        ->latest('release_date')
+        ->limit(10)
+        ->get();
 
-        'profiles' => Inertia::optional(fn () => Profile::query()
-            ->orderBy('created_at', 'desc')
-            ->limit(10)
-            ->get()),
-    ]);
+    $profiles = Inertia::optional(fn () => Profile::query()
+        ->with('media')
+        ->latest()
+        ->limit(10)
+        ->get()
+        ->setHidden(['media'])
+    );
+
+    return Inertia::render('home', compact('games', 'profiles'));
 })->name('home');
 
 Route::get('/about', function () {

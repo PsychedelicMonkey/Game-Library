@@ -7,6 +7,7 @@ use App\Models\Game;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GameController extends Controller
 {
@@ -39,6 +40,10 @@ class GameController extends Controller
      */
     public function show(Game $game): Response
     {
+        if (! $game->isVisible()) {
+            throw new NotFoundHttpException();
+        }
+
         $game->load([
             'developers',
             'genres',
