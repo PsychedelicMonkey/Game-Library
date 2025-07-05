@@ -21,6 +21,7 @@ export interface Game {
     title: string;
     slug: string;
     description: string | null;
+    cover_art: string | null;
     is_featured: boolean;
     release_date: string | null;
     developers: Company[];

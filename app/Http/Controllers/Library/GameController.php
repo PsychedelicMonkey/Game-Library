@@ -41,7 +41,7 @@ class GameController extends Controller
     public function show(Game $game): Response
     {
         if (! $game->isVisible()) {
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException;
         }
 
         $game->load([
@@ -49,6 +49,7 @@ class GameController extends Controller
             'genres',
             'media',
             'publishers',
+            'platforms',
             'tags',
         ]);
 

@@ -13,20 +13,39 @@ export default function ShowGame({ game }: { game: Game }) {
             <Head title={game.title} />
 
             <header className="mx-auto max-w-7xl p-4 lg:p-6">
-                <h1 className="text-3xl leading-12 font-semibold text-base-content">{game.title}</h1>
+                <h1 className="text-3xl leading-8 font-semibold text-base-content">{game.title}</h1>
                 <h2 className="text-xl font-semibold text-accent">{moment(game.release_date).format('Y')}</h2>
 
+                {/* TODO: must play titles */}
+                <div className="mt-4">
+                    <Badge size="xl" color="info" badgeStyle="outline">
+                        Must play title
+                    </Badge>
+                </div>
+
                 {/* Grid */}
-                <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-5">
-                    <div className="h-full md:col-span-2 lg:col-span-1">
-                        <figure>
-                            {/* TODO: add media link */}
-                            <img src="" alt="" />
-                        </figure>
+                <div className="mt-8 grid grid-cols-1 place-items-center gap-8 md:grid-cols-5">
+                    <div className="h-full space-y-6 md:col-span-2 lg:col-span-1">
+                        {game.cover_art && (
+                            <figure className="border border-base-300">
+                                <img src={game.cover_art} alt="" />
+                            </figure>
+                        )}
+
+                        {/* TODO: add placeholder cover art */}
+
+                        {/* Platform badges */}
+                        <div className="flex flex-wrap gap-2">
+                            {game.platforms.map((platform) => (
+                                <Badge key={platform.id} color="neutral">
+                                    {platform.name}
+                                </Badge>
+                            ))}
+                        </div>
                     </div>
 
                     {/* Stats box */}
-                    <div className="md:col-span-2">
+                    <div className="w-full self-baseline md:col-span-2">
                         <Stats className="w-full border border-base-300 bg-base-200" direction="vertical">
                             <Stat>
                                 <StatTitle>Critics rating</StatTitle>

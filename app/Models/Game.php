@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasTags;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,13 @@ class Game extends Model implements HasMedia
      * @var string
      */
     protected $table = 'library_games';
+
+    /**
+     * @var list<string>
+     */
+    protected $appends = [
+        'cover_art',
+    ];
 
     /**
      * @var list<string>
@@ -68,11 +76,26 @@ class Game extends Model implements HasMedia
         return $this->belongsToMany(Company::class, 'library_game_publisher', 'library_game_id', 'library_publisher_id');
     }
 
+    protected function coverArt(): Attribute
+    {
+        $this->load('media');
+
+        return Attribute::make(
+            get: fn () => $this->getFirstMediaUrl('game-cover-art')
+        );
+    }
+
     /**
      * Determine if the game is visible.
      */
     public function isVisible(): bool
     {
         return $this->is_visible;
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('game-cover-art')
+            ->singleFile();
     }
 }
