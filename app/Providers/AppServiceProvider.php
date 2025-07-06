@@ -4,7 +4,10 @@ namespace App\Providers;
 
 use App\Models\Subscription;
 use App\Models\SubscriptionItem;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Laravel\Cashier\Cashier;
@@ -41,6 +44,10 @@ class AppServiceProvider extends ServiceProvider
             return $this->app->isProduction()
                 ? $rule->letters()->mixedCase()->numbers()->symbols()
                 : $rule;
+        });
+
+        RateLimiter::for('global', function (Request $request){
+            return Limit::perMinute(1000);
         });
     }
 }

@@ -23,13 +23,15 @@ Route::get('/', function () {
     );
 
     return Inertia::render('home', compact('games', 'profiles'));
-})->name('home');
+})->middleware('throttle:global')->name('home');
 
 Route::get('/about', function () {
     return Inertia::render('about');
 })->name('about');
 
-Route::get('/library/game/{game:slug}', [GameController::class, 'show'])->name('game.show');
+Route::get('/library/game/{game:slug}', [GameController::class, 'show'])
+    ->middleware('throttle:global')
+    ->name('game.show');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

@@ -77,7 +77,7 @@ export default function ShowGame({ game }: { game: Game }) {
                         </Stats>
                     </div>
 
-                    <div className="col-span-full space-y-4 lg:col-span-2">
+                    <div className="col-span-full w-full space-y-4 lg:col-span-2">
                         <div className="space-y-4 border border-base-300 bg-base-200 p-4">
                             <div>
                                 <h2 className="text-lg leading-10">Developers</h2>
@@ -106,15 +106,21 @@ export default function ShowGame({ game }: { game: Game }) {
                             </div>
                         </div>
 
-                        {/* Tags */}
+                        {/* Genres and Tags */}
                         <div className="space-y-4 border border-base-300 bg-base-200 p-4">
+                            <div>
+                                <h2 className="text-lg leading-10 font-semibold">Release Date</h2>
+                                <div className="text-sm">{moment(game.release_date).format('MMM Do, YYYY')}</div>
+                            </div>
+
+                            {/* Genres */}
                             <div>
                                 <h2 className="text-lg leading-10 font-semibold">Genres</h2>
 
                                 <div className="flex flex-wrap gap-1">
                                     {game.genres.map((genre) => (
                                         <Link href="#" key={genre.id}>
-                                            <Badge color="primary" className="duration-200 hover:badge-soft">
+                                            <Badge color="primary" size="sm" className="duration-200 hover:badge-soft">
                                                 {genre.name}
                                             </Badge>
                                         </Link>
@@ -122,13 +128,14 @@ export default function ShowGame({ game }: { game: Game }) {
                                 </div>
                             </div>
 
+                            {/* Tags */}
                             <div>
                                 <h2 className="text-lg leading-10 font-semibold">Tags</h2>
 
                                 <div className="flex flex-wrap gap-1">
                                     {game.tags.map((tag) => (
                                         <Link href="#" key={tag.id}>
-                                            <Badge color="neutral" className="duration-200 hover:badge-outline hover:badge-primary">
+                                            <Badge color="neutral" size="sm" className="duration-200 hover:badge-outline hover:badge-primary">
                                                 {tag.name.en}
                                             </Badge>
                                         </Link>
@@ -144,7 +151,7 @@ export default function ShowGame({ game }: { game: Game }) {
 
             <section>
                 <div className="mx-auto max-w-7xl p-4 lg:p-6">
-                    <div className="bg-base-200 p-6">{game.description}</div>
+                    <div className="border border-base-300 bg-base-200 p-6">{game.description ?? 'No description provided'}</div>
                 </div>
             </section>
         </AppLayout>
