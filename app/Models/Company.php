@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasTags;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -36,6 +37,15 @@ class Company extends Model implements HasMedia
         'country',
         'date_formed',
         'date_defunct',
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var list<string>
+     */
+    protected $hidden = [
+        'is_visible',
     ];
 
     /**
@@ -73,5 +83,21 @@ class Company extends Model implements HasMedia
     public function publishedGames(): BelongsToMany
     {
         return $this->belongsToMany(Game::class, 'library_game_publisher', 'library_publisher_id', 'library_game_id');
+    }
+
+    /**
+     * Determine if the company is visible.
+     */
+    public function isVisible(): bool
+    {
+        return $this->is_visible;
+    }
+
+    /**
+     * @param  Builder<Company>  $query
+     */
+    public function scopeVisible(Builder $query): void
+    {
+        $query->where('is_visible', true);
     }
 }

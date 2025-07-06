@@ -90,6 +90,9 @@ class User extends Authenticatable
         return $this->hasOne(Profile::class);
     }
 
+    /**
+     * @return Attribute<mixed, mixed>
+     */
     protected function avatar(): Attribute
     {
         return new Attribute(

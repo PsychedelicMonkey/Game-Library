@@ -68,6 +68,9 @@ class Profile extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return Attribute<string, null>
+     */
     protected function avatar(): Attribute
     {
         return Attribute::make(

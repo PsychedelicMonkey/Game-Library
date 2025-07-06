@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasTags;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -41,6 +42,15 @@ class Game extends Model implements HasMedia
     ];
 
     /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var list<string>
+     */
+    protected $hidden = [
+        'is_visible',
+    ];
+
+    /**
      * @return array<string, string>
      */
     protected function casts(): array
@@ -76,6 +86,9 @@ class Game extends Model implements HasMedia
         return $this->belongsToMany(Company::class, 'library_game_publisher', 'library_game_id', 'library_publisher_id');
     }
 
+    /**
+     * @return Attribute<string, null>
+     */
     protected function coverArt(): Attribute
     {
         $this->load('media');
@@ -91,6 +104,14 @@ class Game extends Model implements HasMedia
     public function isVisible(): bool
     {
         return $this->is_visible;
+    }
+
+    /**
+     * @param  Builder<Game>  $query
+     */
+    public function scopeVisible(Builder $query): void
+    {
+        $query->where('is_visible', true);
     }
 
     public function registerMediaCollections(): void

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -29,6 +30,15 @@ class Genre extends Model
     ];
 
     /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var list<string>
+     */
+    protected $hidden = [
+        'is_visible',
+    ];
+
+    /**
      * @return array<string, string>
      */
     protected function casts(): array
@@ -43,5 +53,21 @@ class Genre extends Model
     public function games(): BelongsToMany
     {
         return $this->belongsToMany(Game::class, 'library_game_genre', 'library_genre_id', 'library_game_id');
+    }
+
+    /**
+     * Determine if the genre is visible.
+     */
+    public function isVisible(): bool
+    {
+        return $this->is_visible;
+    }
+
+    /**
+     * @param  Builder<Genre>  $query
+     */
+    public function scopeVisible(Builder $query): void
+    {
+        $query->where('is_visible', true);
     }
 }
