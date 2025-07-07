@@ -1,33 +1,17 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Library\GameController;
-use App\Models\Game;
-use App\Models\Profile;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    $games = Game::query()
-        ->where('is_visible', true)
-        ->with(['developers', 'publishers', 'genres', 'platforms'])
-        ->latest('release_date')
-        ->limit(10)
-        ->get();
+Route::get('/', HomeController::class)
+    ->middleware('throttle:global')
+    ->name('home');
 
-    $profiles = Inertia::optional(fn () => Profile::query()
-        ->with('media')
-        ->latest()
-        ->limit(10)
-        ->get()
-        ->setHidden(['media'])
-    );
-
-    return Inertia::render('home', compact('games', 'profiles'));
-})->middleware('throttle:global')->name('home');
-
-Route::get('/about', function () {
-    return Inertia::render('about');
-})->name('about');
+Route::get('/about', AboutController::class)
+    ->middleware('throttle:global')
+    ->name('about');
 
 Route::get('/library/game/{game:slug}', [GameController::class, 'show'])
     ->middleware('throttle:global')
