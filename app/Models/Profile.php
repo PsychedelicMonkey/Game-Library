@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -60,6 +62,18 @@ class Profile extends Model implements HasMedia
         return [
             'is_public' => 'boolean',
         ];
+    }
+
+    /** @return HasMany<Rating, $this> */
+    public function ratings(): HasMany
+    {
+        return $this->hasMany(Rating::class, 'user_profile_id');
+    }
+
+    /** @return HasManyThrough<Review, Rating, $this> */
+    public function reviews(): HasManyThrough
+    {
+        return $this->hasManyThrough(Review::class, Rating::class, 'user_profile_id', 'library_rating_id');
     }
 
     /** @return BelongsTo<User, $this> */

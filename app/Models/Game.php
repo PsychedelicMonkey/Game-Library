@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -84,6 +86,18 @@ class Game extends Model implements HasMedia
     public function publishers(): BelongsToMany
     {
         return $this->belongsToMany(Company::class, 'library_game_publisher', 'library_game_id', 'library_publisher_id');
+    }
+
+    /** @return HasMany<Rating, $this> */
+    public function ratings(): HasMany
+    {
+        return $this->hasMany(Rating::class, 'library_game_id');
+    }
+
+    /** @return HasManyThrough<Review, Rating, $this> */
+    public function reviews(): HasManyThrough
+    {
+        return $this->hasManyThrough(Review::class, Rating::class, 'library_game_id', 'library_rating_id');
     }
 
     /**
