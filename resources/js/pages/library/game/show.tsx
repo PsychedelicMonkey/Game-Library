@@ -186,7 +186,7 @@ export default function ShowGame({ game, reviews }: Props) {
                 {auth.user && (
                     <div className="mb-4 border border-base-300 bg-neutral p-3 text-neutral-content">
                         <div className="flex flex-col items-center">
-                            <h1 className="text-center text-xl font-bold">Add your rating</h1>
+                            <h1 className="text-center text-sm font-bold uppercase">Add your rating</h1>
 
                             {/*  TODO: Review form  */}
                         </div>
