@@ -28,6 +28,8 @@ export interface Game {
     publishers: Company[];
     genres: Genre[];
     platforms: Platform[];
+    ratings_count: number;
+    ratings_avg_score: number;
     tags: Tag[];
     created_at: string;
     updated_at: string;
@@ -54,6 +56,22 @@ export interface Platform {
     discontinued_date: string | null;
     type: PlatformType;
     games: Game[];
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Rating {
+    id: string;
+    score: number;
+    profile: Profile;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Review {
+    id: string;
+    body: string;
+    rating: Rating;
     created_at: string;
     updated_at: string;
 }

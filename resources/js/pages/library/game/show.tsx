@@ -1,13 +1,24 @@
+import RatingProgress from '@/components/rating-progress';
+import ReviewCard from '@/components/review-card';
 import { Badge } from '@/components/ui/badge';
+import { Loading } from '@/components/ui/loading';
 import RadialProgress from '@/components/ui/radial-progress';
 import { Stat, StatDesc, StatFigure, Stats, StatTitle, StatValue } from '@/components/ui/stat';
 import { AppLayout } from '@/layouts/app-layout';
-import type { Game } from '@/types/library';
-import { Head, Link } from '@inertiajs/react';
+import { SharedData } from '@/types';
+import type { Game, Review } from '@/types/library';
+import { Head, Link, usePage, WhenVisible } from '@inertiajs/react';
 import moment from 'moment';
 import * as React from 'react';
 
-export default function ShowGame({ game }: { game: Game }) {
+type Props = {
+    game: Game;
+    reviews: Review[];
+};
+
+export default function ShowGame({ game, reviews }: Props) {
+    const { auth } = usePage<SharedData>().props;
+
     return (
         <AppLayout>
             <Head title={game.title} />
@@ -64,14 +75,14 @@ export default function ShowGame({ game }: { game: Game }) {
                             <Stat>
                                 <StatTitle>Audience rating</StatTitle>
                                 <StatFigure>
-                                    <RadialProgress value={91} color="success" />
+                                    <RatingProgress value={Math.round(game.ratings_avg_score)} />
                                 </StatFigure>
                                 <StatValue>
-                                    91
+                                    {Math.round(game.ratings_avg_score)}
                                     <span className="text-sm">/100</span>
                                 </StatValue>
                                 <StatDesc>
-                                    Based on <span className="font-bold">25</span> ratings
+                                    Based on <span className="font-bold">{game.ratings_count}</span> ratings
                                 </StatDesc>
                             </Stat>
                         </Stats>
@@ -147,12 +158,52 @@ export default function ShowGame({ game }: { game: Game }) {
                 </div>
             </header>
 
+            {/* Description */}
             <div className="divider mx-auto max-w-7xl px-4 text-xl lg:px-6">Description</div>
 
             <section>
                 <div className="mx-auto max-w-7xl p-4 lg:p-6">
                     <div className="border border-base-300 bg-base-200 p-6">{game.description ?? 'No description provided'}</div>
                 </div>
+            </section>
+
+            {/* Recent user reviews */}
+            <div className="divider mx-auto max-w-7xl px-4 text-xl lg:px-6">Recent user reviews</div>
+
+            <section className="mx-auto max-w-7xl space-y-2 p-4 lg:p-6">
+                {/* Sign in banner */}
+                {!auth.user && (
+                    <div className="mb-4 border border-base-300 bg-base-200 p-3 text-center">
+                        <p className="text-sm uppercase">
+                            <Link href={route('login')} className="font-bold hover:underline">
+                                Sign in
+                            </Link>{' '}
+                            to rate and review
+                        </p>
+                    </div>
+                )}
+
+                {auth.user && (
+                    <div className="mb-4 border border-base-300 bg-neutral p-3 text-neutral-content">
+                        <div className="flex flex-col items-center">
+                            <h1 className="text-center text-xl font-bold">Add your rating</h1>
+
+                            {/*  TODO: Review form  */}
+                        </div>
+                    </div>
+                )}
+
+                {/* TODO: Change loading to skeleton */}
+                <WhenVisible
+                    data={['reviews']}
+                    fallback={
+                        <div>
+                            <Loading type="bars" />
+                        </div>
+                    }
+                >
+                    <>{reviews?.map((review) => <ReviewCard key={review.id} review={review} />)}</>
+                </WhenVisible>
             </section>
         </AppLayout>
     );

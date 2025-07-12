@@ -51,9 +51,21 @@ class GameController extends Controller
             'publishers',
             'platforms',
             'tags',
-        ]);
+        ])
+            ->loadAvg('ratings', 'score')
+            ->loadCount('ratings');
 
-        return Inertia::render('library/game/show', compact('game'));
+        $reviews = Inertia::optional(function () use ($game) {
+            return $game
+                ->reviews()
+                ->with(['rating.profile', 'rating.profile.media', 'rating'])
+                ->latest()
+                ->limit(10)
+                ->get()
+                ->makeHidden('laravel_through_key');
+        });
+
+        return Inertia::render('library/game/show', compact('game', 'reviews'));
     }
 
     /**
