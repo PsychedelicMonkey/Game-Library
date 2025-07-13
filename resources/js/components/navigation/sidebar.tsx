@@ -8,6 +8,19 @@ export default function Sidebar() {
 
     return (
         <DrawerSide>
+            <li>
+                <a href="#">Best Games</a>
+            </li>
+            <li>
+                <a href="#">New Releases</a>
+            </li>
+            <li>
+                <a href="#">Lists</a>
+            </li>
+            <li>
+                <a href="#">Genres</a>
+            </li>
+
             {auth.user ? (
                 <>
                     <li>

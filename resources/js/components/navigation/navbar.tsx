@@ -15,10 +15,25 @@ function Navbar() {
                 <DrawerButton />
             </div>
 
-            <div className="flex-1">
+            <div className="flex flex-1 items-baseline">
                 <Link href={route('home')} className="btn text-xl btn-ghost">
                     {name}
                 </Link>
+
+                <ul className="menu menu-horizontal hidden px-1 lg:flex">
+                    <li>
+                        <a href="#">Best Games</a>
+                    </li>
+                    <li>
+                        <a href="#">New Releases</a>
+                    </li>
+                    <li>
+                        <a href="#">Lists</a>
+                    </li>
+                    <li>
+                        <a href="#">Genres</a>
+                    </li>
+                </ul>
             </div>
 
             <div className="flex gap-2">
