@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Game;
+use App\Models\Library\Game;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Inertia\Inertia;

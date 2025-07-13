@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Library;
 
 use App\Traits\HasTags;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -17,7 +17,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Game extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\GameFactory> */
+    /** @use HasFactory<\Database\Factories\Library\GameFactory> */
     use HasFactory, HasTags, HasUlids, InteractsWithMedia;
 
     /**

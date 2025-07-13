@@ -1,20 +1,20 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Library;
 
-use App\Models\Genre;
+use App\Models\Library\Game;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Genre>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Library\Game>
  */
-class GenreFactory extends Factory
+class GameFactory extends Factory
 {
     /**
-     * @var class-string<Genre>
+     * @var class-string<Game>
      */
-    protected $model = Genre::class;
+    protected $model = Game::class;
 
     /**
      * Define the model's default state.
@@ -24,11 +24,12 @@ class GenreFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $name = $this->faker->unique()->word(),
-            'slug' => Str::slug($name),
-            'description' => $this->faker->realText(),
+            'title' => $title = $this->faker->unique()->sentence(),
+            'slug' => Str::slug($title),
+            'description' => $this->faker->realText(500),
             'is_visible' => $this->faker->boolean(),
             'is_featured' => $this->faker->boolean(),
+            'release_date' => $this->faker->dateTimeBetween('-35 years', '-1 year'),
             'created_at' => $this->faker->dateTimeBetween('-1 year', '-6 month'),
             'updated_at' => $this->faker->dateTimeBetween('-5 month'),
         ];

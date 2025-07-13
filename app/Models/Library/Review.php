@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Library;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Review extends Model
 {
-    /** @use HasFactory<\Database\Factories\ReviewFactory> */
+    /** @use HasFactory<\Database\Factories\Library\ReviewFactory> */
     use HasFactory, HasUlids;
 
     /**

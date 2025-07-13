@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Library;
 
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Genre extends Model
 {
-    /** @use HasFactory<\Database\Factories\GenreFactory> */
+    /** @use HasFactory<\Database\Factories\Library\GenreFactory> */
     use HasFactory, HasUlids;
 
     /**

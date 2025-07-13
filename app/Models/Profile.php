@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Library\Rating;
+use App\Models\Library\Review;
 use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;

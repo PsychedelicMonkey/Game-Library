@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Library;
 
 use App\Enums\PlatformType;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -14,7 +14,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Platform extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\PlatformFactory> */
+    /** @use HasFactory<\Database\Factories\Library\PlatformFactory> */
     use HasFactory, HasUlids, InteractsWithMedia;
 
     /**

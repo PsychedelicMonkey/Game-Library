@@ -1,21 +1,20 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Library;
 
-use App\Enums\PlatformType;
-use App\Models\Platform;
+use App\Models\Library\Genre;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Platform>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Library\Genre>
  */
-class PlatformFactory extends Factory
+class GenreFactory extends Factory
 {
     /**
-     * @var class-string<Platform>
+     * @var class-string<Genre>
      */
-    protected $model = Platform::class;
+    protected $model = Genre::class;
 
     /**
      * Define the model's default state.
@@ -30,9 +29,6 @@ class PlatformFactory extends Factory
             'description' => $this->faker->realText(),
             'is_visible' => $this->faker->boolean(),
             'is_featured' => $this->faker->boolean(),
-            'release_date' => $this->faker->dateTimeBetween('-35 year', '-1 year'),
-            'discontinued_date' => $this->faker->dateTimeBetween('-30 year', '-1 year'),
-            'type' => $this->faker->randomElement(PlatformType::class),
             'created_at' => $this->faker->dateTimeBetween('-1 year', '-6 month'),
             'updated_at' => $this->faker->dateTimeBetween('-5 month'),
         ];

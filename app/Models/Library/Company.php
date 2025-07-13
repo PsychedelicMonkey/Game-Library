@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Library;
 
 use App\Traits\HasTags;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -16,7 +16,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Company extends Model implements HasMedia
 {
-    /** @use HasFactory<\Database\Factories\CompanyFactory> */
+    /** @use HasFactory<\Database\Factories\Library\CompanyFactory> */
     use HasFactory, HasTags, HasUlids, InteractsWithMedia;
 
     /**

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Library;
 
 use App\Http\Controllers\Controller;
-use App\Models\Game;
+use App\Models\Library\Game;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
