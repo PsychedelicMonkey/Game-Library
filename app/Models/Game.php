@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasTags;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -121,9 +122,12 @@ class Game extends Model implements HasMedia
     }
 
     /**
+     * Scope a query to only include visible games.
+     *
      * @param  Builder<Game>  $query
      */
-    public function scopeVisible(Builder $query): void
+    #[Scope]
+    protected function visible(Builder $query): void
     {
         $query->where('is_visible', true);
     }

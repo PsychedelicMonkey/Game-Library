@@ -16,7 +16,7 @@ class HomeController extends Controller
     public function __invoke(Request $request): Response
     {
         $games = Game::query()
-            ->where('is_visible', true)
+            ->visible()
             ->with(['developers', 'publishers', 'genres', 'platforms'])
             ->latest('release_date')
             ->limit(10)

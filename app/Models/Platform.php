@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\PlatformType;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -73,9 +74,12 @@ class Platform extends Model implements HasMedia
     }
 
     /**
+     *  Scope a query to only include visible platforms.
+     *
      * @param  Builder<Platform>  $query
      */
-    public function scopeVisible(Builder $query): void
+    #[Scope]
+    public function visible(Builder $query): void
     {
         $query->where('is_visible', true);
     }
