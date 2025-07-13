@@ -65,28 +65,44 @@ class Game extends Model implements HasMedia
         ];
     }
 
-    /** @return BelongsToMany<Company, $this> */
+    /** @return BelongsToMany<Company, $this, DeveloperGame, 'pivot'> */
     public function developers(): BelongsToMany
     {
-        return $this->belongsToMany(Company::class, 'library_developer_game', 'library_game_id', 'library_developer_id');
+        return $this
+            ->belongsToMany(Company::class, 'library_developer_game', 'library_game_id', 'library_developer_id')
+            ->using(DeveloperGame::class)
+            ->withPivot(['is_primary', 'sort'])
+            ->withTimestamps();
     }
 
-    /** @return BelongsToMany<Genre, $this> */
+    /** @return BelongsToMany<Genre, $this, GameGenre, 'pivot'> */
     public function genres(): BelongsToMany
     {
-        return $this->belongsToMany(Genre::class, 'library_game_genre', 'library_game_id', 'library_genre_id');
+        return $this
+            ->belongsToMany(Genre::class, 'library_game_genre', 'library_game_id', 'library_genre_id')
+            ->using(GameGenre::class)
+            ->withPivot('sort')
+            ->withTimestamps();
     }
 
-    /** @return BelongsToMany<Platform, $this> */
+    /** @return BelongsToMany<Platform, $this, GamePlatform, 'pivot'> */
     public function platforms(): BelongsToMany
     {
-        return $this->belongsToMany(Platform::class, 'library_game_platform', 'library_game_id', 'library_platform_id');
+        return $this
+            ->belongsToMany(Platform::class, 'library_game_platform', 'library_game_id', 'library_platform_id')
+            ->using(GamePlatform::class)
+            ->withPivot(['release_date', 'url', 'sort'])
+            ->withTimestamps();
     }
 
-    /** @return BelongsToMany<Company, $this> */
+    /** @return BelongsToMany<Company, $this, GamePublisher, 'pivot'> */
     public function publishers(): BelongsToMany
     {
-        return $this->belongsToMany(Company::class, 'library_game_publisher', 'library_game_id', 'library_publisher_id');
+        return $this
+            ->belongsToMany(Company::class, 'library_game_publisher', 'library_game_id', 'library_publisher_id')
+            ->using(GamePublisher::class)
+            ->withPivot(['is_primary', 'sort'])
+            ->withTimestamps();
     }
 
     /** @return HasMany<Rating, $this> */
