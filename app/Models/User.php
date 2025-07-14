@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -28,8 +30,12 @@ use function Illuminate\Events\queueable;
  */
 class User extends Authenticatable
 {
+    use Billable;
+    use HasApiTokens;
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use Billable, HasApiTokens, HasFactory, HasUlids, Notifiable;
+    use HasFactory;
+    use HasUlids;
+    use Notifiable;
 
     /**
      * The accessors to append to the model's array form.

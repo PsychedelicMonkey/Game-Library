@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Library;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -10,7 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Review extends Model
 {
     /** @use HasFactory<\Database\Factories\Library\ReviewFactory> */
-    use HasFactory, HasUlids;
+    use HasFactory;
+    use HasUlids;
 
     /**
      * @var string

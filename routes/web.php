@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Library\GameController;
@@ -17,5 +19,5 @@ Route::get('/library/game/{game:slug}', [GameController::class, 'show'])
     ->middleware('throttle:global')
     ->name('game.show');
 
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';
+require __DIR__ . '/settings.php';
+require __DIR__ . '/auth.php';

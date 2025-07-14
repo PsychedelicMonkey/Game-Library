@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Library;
 
 use App\Models\Profile;
@@ -12,7 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Rating extends Model
 {
     /** @use HasFactory<\Database\Factories\Library\RatingFactory> */
-    use HasFactory, HasUlids;
+    use HasFactory;
+    use HasUlids;
 
     /**
      * @var string

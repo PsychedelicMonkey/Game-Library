@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use App\Models\Library\Company;
@@ -27,19 +29,19 @@ class DatabaseSeeder extends Seeder
         DB::raw('SET time_zone=\'+00:00\'');
 
         // Guest users
-        $this->command->warn(PHP_EOL.'Creating guest users...');
+        $this->command->warn(PHP_EOL . 'Creating guest users...');
         $users = $this->withProgressBar(1000, fn () => User::factory(1)
             ->create());
         $this->command->info('Guest users created.');
 
         // Tags
-        $this->command->warn(PHP_EOL.'Creating tags');
+        $this->command->warn(PHP_EOL . 'Creating tags');
         $tags = $this->withProgressBar(100, fn () => Tag::factory(1)
             ->create());
         $this->command->info('Tags created.');
 
         // Library
-        $this->command->warn(PHP_EOL.'Creating library companies...');
+        $this->command->warn(PHP_EOL . 'Creating library companies...');
         $companies = $this->withProgressBar(100, fn () => Company::factory(1)
             ->has(
                 Company::factory(3),
@@ -48,17 +50,17 @@ class DatabaseSeeder extends Seeder
             ->create());
         $this->command->info('Library companies created.');
 
-        $this->command->warn(PHP_EOL.'Creating library genres...');
+        $this->command->warn(PHP_EOL . 'Creating library genres...');
         $genres = $this->withProgressBar(50, fn () => Genre::factory(1)
             ->create());
         $this->command->info('Library genres created.');
 
-        $this->command->warn(PHP_EOL.'Creating library platforms...');
+        $this->command->warn(PHP_EOL . 'Creating library platforms...');
         $platforms = $this->withProgressBar(50, fn () => Platform::factory(1)
             ->create());
         $this->command->info('Library platforms created.');
 
-        $this->command->warn(PHP_EOL.'Creating library games...');
+        $this->command->warn(PHP_EOL . 'Creating library games...');
         $games = $this->withProgressBar(500, fn () => Game::factory(1)
             ->hasAttached($companies->random(rand(1, 3)), relationship: 'developers')
             ->hasAttached($companies->random(rand(1, 3)), relationship: 'publishers')

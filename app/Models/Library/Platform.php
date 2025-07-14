@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Library;
 
 use App\Enums\PlatformType;
@@ -15,7 +17,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Platform extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\Library\PlatformFactory> */
-    use HasFactory, HasUlids, InteractsWithMedia;
+    use HasFactory;
+    use HasUlids;
+    use InteractsWithMedia;
 
     /**
      * @var string

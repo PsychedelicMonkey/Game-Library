@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Library;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;

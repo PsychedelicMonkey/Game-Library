@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Library;
 
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -12,7 +14,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Genre extends Model
 {
     /** @use HasFactory<\Database\Factories\Library\GenreFactory> */
-    use HasFactory, HasUlids;
+    use HasFactory;
+    use HasUlids;
 
     /**
      * @var string

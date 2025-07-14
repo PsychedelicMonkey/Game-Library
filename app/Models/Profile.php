@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Models\Library\Rating;
@@ -29,7 +31,9 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class Profile extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\ProfileFactory> */
-    use HasFactory, HasUlids, InteractsWithMedia;
+    use HasFactory;
+    use HasUlids;
+    use InteractsWithMedia;
 
     /**
      * @var string

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models\Library;
 
 use App\Traits\HasTags;
@@ -18,7 +20,10 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Game extends Model implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\Library\GameFactory> */
-    use HasFactory, HasTags, HasUlids, InteractsWithMedia;
+    use HasFactory;
+    use HasTags;
+    use HasUlids;
+    use InteractsWithMedia;
 
     /**
      * @var string

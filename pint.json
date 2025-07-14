@@ -1,3 +1,11 @@
 {
-    "preset": "laravel"
+    "preset": "laravel",
+    "rules": {
+        "class_attributes_separation": false,
+        "concat_space": {
+            "spacing": "one"
+        },
+        "declare_strict_types": true,
+        "single_trait_insert_per_statement": true
+    }
 }
