@@ -7,6 +7,7 @@ import { Loading } from '@/components/ui/loading';
 import { AppLayout } from '@/layouts/app-layout';
 import { Head, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { FloatingLabel } from '@/components/ui/floating-label';
 
 interface ResetPasswordProps {
     token: string;
@@ -45,45 +46,50 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
 
                 <form onSubmit={submit}>
                     <Fieldset className="w-md rounded-box border border-base-300 bg-base-200 p-4">
-                        <InputLabel htmlFor="email">Email Address</InputLabel>
-                        <Input
-                            type="email"
-                            name="email"
-                            id="email"
-                            className="w-full"
-                            value={data.email}
-                            onChange={(e) => setData('email', e.target.value)}
-                            disabled={processing}
-                            readOnly
-                        />
-                        <InputError message={errors.email} />
+                        <div className="space-y-4">
+                            <FloatingLabel label="Email address">
+                                <Input
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    className="w-full"
+                                    value={data.email}
+                                    onChange={(e) => setData('email', e.target.value)}
+                                    disabled={processing}
+                                    readOnly
+                                />
+                                <InputError message={errors.email} className="mt-1" />
+                            </FloatingLabel>
 
-                        <InputLabel htmlFor="password">Password</InputLabel>
-                        <Input
-                            type="password"
-                            name="password"
-                            id="password"
-                            className="w-full"
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
-                            disabled={processing}
-                            autoFocus
-                            placeholder="Password"
-                        />
-                        <InputError message={errors.password} />
+                            <FloatingLabel label="Password">
+                                <Input
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    className="w-full"
+                                    value={data.password}
+                                    onChange={(e) => setData('password', e.target.value)}
+                                    disabled={processing}
+                                    autoFocus
+                                    placeholder="Password"
+                                />
+                                <InputError message={errors.password} className="mt-1" />
+                            </FloatingLabel>
 
-                        <InputLabel htmlFor="password_confirmation">Password Confirmation</InputLabel>
-                        <Input
-                            type="password"
-                            name="password_confirmation"
-                            id="password_confirmation"
-                            className="w-full"
-                            value={data.password_confirmation}
-                            onChange={(e) => setData('password_confirmation', e.target.value)}
-                            disabled={processing}
-                            placeholder="Confirm password"
-                        />
-                        <InputError message={errors.password_confirmation} />
+                            <FloatingLabel label="Confirm password">
+                                <Input
+                                    type="password"
+                                    name="password_confirmation"
+                                    id="password_confirmation"
+                                    className="w-full"
+                                    value={data.password_confirmation}
+                                    onChange={(e) => setData('password_confirmation', e.target.value)}
+                                    disabled={processing}
+                                    placeholder="Confirm password"
+                                />
+                                <InputError message={errors.password_confirmation} className="mt-1" />
+                            </FloatingLabel>
+                        </div>
 
                         <Button type="submit" color="neutral" disabled={processing} className="mt-4">
                             {processing ? <Loading size="sm" type="bars" /> : 'Reset password'}

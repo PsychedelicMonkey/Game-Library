@@ -7,6 +7,7 @@ import { Loading } from '@/components/ui/loading';
 import { AppLayout } from '@/layouts/app-layout';
 import { Head, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
+import { FloatingLabel } from '@/components/ui/floating-label';
 
 type RegisterForm = {
     name: string;
@@ -39,70 +40,76 @@ export default function Register() {
                 <h1 className="mb-8 text-3xl font-semibold">Register Your Account</h1>
 
                 <div className="flex flex-col gap-12 lg:flex-row lg:gap-20">
-                    <form onSubmit={submit} className="md:self-center">
+                    <form onSubmit={submit} className="md:self-baseline">
                         <Fieldset className="rounded-box border border-base-300 bg-base-200 p-4 md:w-md">
-                            <InputLabel htmlFor="name">Name</InputLabel>
-                            <Input
-                                type="text"
-                                name="name"
-                                id="name"
-                                className="w-full"
-                                required
-                                tabIndex={1}
-                                autoComplete="name"
-                                value={data.name}
-                                onChange={(e) => setData('name', e.target.value)}
-                                disabled={processing}
-                                placeholder="Full name"
-                            />
-                            <InputError message={errors.name} />
+                            <div className="space-y-4">
+                                <FloatingLabel label="Full name">
+                                    <Input
+                                        type="text"
+                                        name="name"
+                                        id="name"
+                                        className="w-full"
+                                        required
+                                        tabIndex={1}
+                                        autoComplete="name"
+                                        value={data.name}
+                                        onChange={(e) => setData('name', e.target.value)}
+                                        disabled={processing}
+                                        placeholder="Full name"
+                                    />
+                                    <InputError message={errors.name} className="mt-1" />
+                                </FloatingLabel>
 
-                            <InputLabel htmlFor="email">Email address</InputLabel>
-                            <Input
-                                type="email"
-                                name="email"
-                                id="email"
-                                className="w-full"
-                                required
-                                tabIndex={2}
-                                autoComplete="email"
-                                value={data.email}
-                                onChange={(e) => setData('email', e.target.value)}
-                                disabled={processing}
-                                placeholder="email@example.com"
-                            />
-                            <InputError message={errors.email} />
+                                <FloatingLabel label="Email address">
+                                    <Input
+                                        type="email"
+                                        name="email"
+                                        id="email"
+                                        className="w-full"
+                                        required
+                                        tabIndex={2}
+                                        autoComplete="email"
+                                        value={data.email}
+                                        onChange={(e) => setData('email', e.target.value)}
+                                        disabled={processing}
+                                        placeholder="Email address"
+                                    />
+                                    <InputError message={errors.email} className="mt-1" />
+                                </FloatingLabel>
 
-                            <InputLabel htmlFor="password">Password</InputLabel>
-                            <Input
-                                type="password"
-                                name="password"
-                                id="password"
-                                className="w-full"
-                                required
-                                tabIndex={3}
-                                autoComplete="new-password"
-                                value={data.password}
-                                onChange={(e) => setData('password', e.target.value)}
-                                disabled={processing}
-                                placeholder="Password"
-                            />
-                            <InputError message={errors.password} />
+                                <FloatingLabel label="Password">
+                                    <Input
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        className="w-full"
+                                        required
+                                        tabIndex={3}
+                                        autoComplete="new-password"
+                                        value={data.password}
+                                        onChange={(e) => setData('password', e.target.value)}
+                                        disabled={processing}
+                                        placeholder="Password"
+                                    />
+                                    <InputError message={errors.password} className="mt-1" />
+                                </FloatingLabel>
 
-                            <InputLabel htmlFor="password_confirmation">Password confirmation</InputLabel>
-                            <Input
-                                type="password"
-                                name="password_confirmation"
-                                id="password_confirmation"
-                                className="w-full"
-                                required
-                                tabIndex={4}
-                                value={data.password_confirmation}
-                                onChange={(e) => setData('password_confirmation', e.target.value)}
-                                disabled={processing}
-                                placeholder="Confirm password"
-                            />
-                            <InputError message={errors.password_confirmation} />
+                                <FloatingLabel label="Confirm password">
+                                    <Input
+                                        type="password"
+                                        name="password_confirmation"
+                                        id="password_confirmation"
+                                        className="w-full"
+                                        required
+                                        tabIndex={4}
+                                        value={data.password_confirmation}
+                                        onChange={(e) => setData('password_confirmation', e.target.value)}
+                                        disabled={processing}
+                                        placeholder="Confirm password"
+                                    />
+                                    <InputError message={errors.password_confirmation} className="mt-1" />
+                                </FloatingLabel>
+                            </div>
 
                             <Button type="submit" disabled={processing} color="neutral" className="mt-4">
                                 {processing ? <Loading size="sm" type="bars" /> : 'Register'}

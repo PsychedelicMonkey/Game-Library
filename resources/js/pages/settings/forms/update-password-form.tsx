@@ -8,6 +8,7 @@ import { Loading } from '@/components/ui/loading';
 import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler, useRef } from 'react';
+import { FloatingLabel } from '@/components/ui/floating-label';
 
 export default function UpdatePasswordForm() {
     const passwordInput = useRef<HTMLInputElement>(null);
@@ -42,59 +43,64 @@ export default function UpdatePasswordForm() {
     return (
         <form onSubmit={submit}>
             <Fieldset className="rounded-box border border-base-300 bg-base-200 p-4 lg:w-md">
-                <Transition
-                    show={recentlySuccessful}
-                    enter="transition ease-in-out"
-                    enterFrom="opacity-0"
-                    leave="transition ease-in-out"
-                    leaveTo="opacity-0"
-                >
-                    <Alert message="Password updated" color="success" icon />
-                </Transition>
+                <div className="space-y-4">
+                    <Transition
+                        show={recentlySuccessful}
+                        enter="transition ease-in-out"
+                        enterFrom="opacity-0"
+                        leave="transition ease-in-out"
+                        leaveTo="opacity-0"
+                    >
+                        <Alert message="Password updated" color="success" icon />
+                    </Transition>
 
-                <InputLabel htmlFor="current_password">Current Password</InputLabel>
-                <Input
-                    type="password"
-                    name="current_password"
-                    id="current_password"
-                    className="w-full"
-                    ref={currentPasswordInput}
-                    value={data.current_password}
-                    onChange={(e) => setData('current_password', e.target.value)}
-                    disabled={processing}
-                    autoComplete="current-password"
-                    placeholder="Current password"
-                />
-                <InputError message={errors.current_password} />
+                    <FloatingLabel label="Current Password">
+                        <Input
+                            type="password"
+                            name="current_password"
+                            id="current_password"
+                            className="w-full"
+                            ref={currentPasswordInput}
+                            value={data.current_password}
+                            onChange={(e) => setData('current_password', e.target.value)}
+                            disabled={processing}
+                            autoComplete="current-password"
+                            placeholder="Current Password"
+                        />
+                        <InputError message={errors.current_password} className="mt-1" />
+                    </FloatingLabel>
 
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <Input
-                    type="password"
-                    name="password"
-                    id="password"
-                    className="w-full"
-                    ref={currentPasswordInput}
-                    value={data.password}
-                    onChange={(e) => setData('password', e.target.value)}
-                    disabled={processing}
-                    autoComplete="new-password"
-                    placeholder="New Password"
-                />
-                <InputError message={errors.password} />
+                    <FloatingLabel label="Password">
+                        <Input
+                            type="password"
+                            name="password"
+                            id="password"
+                            className="w-full"
+                            ref={currentPasswordInput}
+                            value={data.password}
+                            onChange={(e) => setData('password', e.target.value)}
+                            disabled={processing}
+                            autoComplete="new-password"
+                            placeholder="New Password"
+                        />
+                        <InputError message={errors.password} className="mt-1" />
+                    </FloatingLabel>
 
-                <InputLabel htmlFor="password_confirmation">Password Confirmation</InputLabel>
-                <Input
-                    type="password"
-                    name="password_confirmation"
-                    id="password_confirmation"
-                    className="w-full"
-                    value={data.password_confirmation}
-                    onChange={(e) => setData('password_confirmation', e.target.value)}
-                    disabled={processing}
-                    autoComplete="new-password"
-                    placeholder="Confirm password"
-                />
-                <InputError message={errors.password_confirmation} />
+                    <FloatingLabel label="Confirm Password">
+                        <Input
+                            type="password"
+                            name="password_confirmation"
+                            id="password_confirmation"
+                            className="w-full"
+                            value={data.password_confirmation}
+                            onChange={(e) => setData('password_confirmation', e.target.value)}
+                            disabled={processing}
+                            autoComplete="new-password"
+                            placeholder="Confirm Password"
+                        />
+                        <InputError message={errors.password_confirmation} className="mt-1" />
+                    </FloatingLabel>
+                </div>
 
                 <Button type="submit" color="primary" disabled={processing} className="mt-4">
                     {processing ? <Loading size="sm" type="bars" /> : 'Save'}

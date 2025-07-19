@@ -1,6 +1,7 @@
 import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Fieldset } from '@/components/ui/fieldset';
+import { FloatingLabel } from '@/components/ui/floating-label';
 import Input from '@/components/ui/input';
 import InputError from '@/components/ui/input-error';
 import { InputLabel } from '@/components/ui/input-label';
@@ -40,44 +41,48 @@ export default function Login({ canResetPassword, status }: LoginProps) {
             <Head title="Login" />
 
             <div className="mx-auto max-w-7xl p-4 lg:p-6">
-                {status && <Alert message={status} color="success" icon />}
-
                 <h1 className="my-4 text-3xl font-semibold">Login</h1>
 
                 <form onSubmit={submit}>
                     <Fieldset className="rounded-box border border-base-300 bg-base-200 p-4 lg:w-md">
-                        <InputLabel htmlFor="email">Email address</InputLabel>
-                        <Input
-                            type="email"
-                            name="email"
-                            id="email"
-                            className="w-full"
-                            required
-                            autoFocus
-                            tabIndex={1}
-                            autoComplete="email"
-                            value={data.email}
-                            onChange={(e) => setData('email', e.target.value)}
-                            disabled={processing}
-                            placeholder="email@example.com"
-                        />
-                        <InputError message={errors.email} />
+                        <div className="space-y-4">
+                            {status && <Alert message={status} color="success" icon />}
 
-                        <InputLabel htmlFor="password">Password</InputLabel>
-                        <Input
-                            type="password"
-                            name="password"
-                            id="password"
-                            className="w-full"
-                            required
-                            tabIndex={2}
-                            autoComplete="current-password"
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
-                            disabled={processing}
-                            placeholder="Password"
-                        />
-                        <InputError message={errors.password} />
+                            <FloatingLabel label="Email address">
+                                <Input
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    className="w-full"
+                                    placeholder="Email address"
+                                    required
+                                    autoFocus
+                                    tabIndex={1}
+                                    autoComplete="email"
+                                    value={data.email}
+                                    onChange={(e) => setData('email', e.target.value)}
+                                    disabled={processing}
+                                />
+                                <InputError message={errors.email} className="mt-1" />
+                            </FloatingLabel>
+
+                            <FloatingLabel label="Password">
+                                <Input
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    className="w-full"
+                                    required
+                                    tabIndex={2}
+                                    autoComplete="current-password"
+                                    value={data.password}
+                                    onChange={(e) => setData('password', e.target.value)}
+                                    disabled={processing}
+                                    placeholder="Password"
+                                />
+                                <InputError message={errors.password} className="mt-1" />
+                            </FloatingLabel>
+                        </div>
 
                         {canResetPassword && (
                             <Link href={route('password.request')} className="link link-hover">
