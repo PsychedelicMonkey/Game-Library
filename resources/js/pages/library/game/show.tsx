@@ -1,3 +1,4 @@
+import RatingForm from '@/components/rating-form';
 import RatingProgress from '@/components/rating-progress';
 import ReviewCard from '@/components/review-card';
 import { Badge } from '@/components/ui/badge';
@@ -184,11 +185,15 @@ export default function ShowGame({ game, reviews }: Props) {
                 )}
 
                 {auth.user && (
-                    <div className="mb-4 border border-base-300 bg-neutral p-3 text-neutral-content">
+                    <div className="mb-4 p-3">
                         <div className="flex flex-col items-center">
-                            <h1 className="text-center text-sm font-bold uppercase">Add your rating</h1>
+                            <div className="mb-4 w-full border border-base-300 bg-base-200 p-2">
+                                <h1 className="text-center text-sm font-bold uppercase">Add your rating</h1>
+                            </div>
 
-                            {/*  TODO: Review form  */}
+                            <div className="w-full md:w-lg">
+                                <RatingForm game={game} />
+                            </div>
                         </div>
                     </div>
                 )}

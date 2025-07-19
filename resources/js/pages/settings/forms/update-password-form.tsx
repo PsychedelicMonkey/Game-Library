@@ -1,14 +1,13 @@
 import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Fieldset } from '@/components/ui/fieldset';
+import { FloatingLabel } from '@/components/ui/floating-label';
 import Input from '@/components/ui/input';
 import InputError from '@/components/ui/input-error';
-import { InputLabel } from '@/components/ui/input-label';
 import { Loading } from '@/components/ui/loading';
 import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler, useRef } from 'react';
-import { FloatingLabel } from '@/components/ui/floating-label';
 
 export default function UpdatePasswordForm() {
     const passwordInput = useRef<HTMLInputElement>(null);
